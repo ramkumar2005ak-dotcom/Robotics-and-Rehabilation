@@ -130,6 +130,15 @@
             }
         }
 
+        @keyframes slideGallery {
+            0% {
+                transform: translateX(0);
+            }
+            100% {
+                transform: translateX(-50%);
+            }
+        }
+
         /* ============================================================
                    HEADER / NAVBAR
                    ============================================================ */
@@ -299,6 +308,192 @@
         }
 
         /* ============================================================
+                   GALLERY SECTION - HORIZONTAL SCROLL
+                   ============================================================ */
+        .gallery-section {
+            padding: 3rem 0 4rem;
+            border-top: 1px solid var(--border-color);
+        }
+
+        .gallery-section .gallery-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .gallery-section .gallery-header h2 {
+            font-size: 2.2rem;
+            font-weight: 700;
+        }
+
+        .gallery-section .gallery-header h2 i {
+            color: var(--accent);
+            margin-right: 0.8rem;
+        }
+
+        .gallery-section .gallery-header .gallery-nav {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .gallery-section .gallery-header .gallery-nav button {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            border: 1.5px solid var(--border-color);
+            background: white;
+            color: var(--secondary);
+            font-size: 1.2rem;
+            cursor: pointer;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .gallery-section .gallery-header .gallery-nav button:hover {
+            background: var(--accent);
+            color: white;
+            border-color: var(--accent);
+            transform: scale(1.05);
+        }
+
+        .gallery-wrapper {
+            overflow: hidden;
+            position: relative;
+            border-radius: 1.5rem;
+            cursor: grab;
+        }
+
+        .gallery-wrapper:active {
+            cursor: grabbing;
+        }
+
+        .gallery-track {
+            display: flex;
+            gap: 1.5rem;
+            transition: transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            will-change: transform;
+            padding: 0.5rem 0;
+        }
+
+        .gallery-item {
+            min-width: 320px;
+            max-width: 320px;
+            border-radius: 1.5rem;
+            overflow: hidden;
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            flex-shrink: 0;
+            position: relative;
+        }
+
+        .gallery-item:hover {
+            transform: translateY(-8px) scale(1.02);
+            box-shadow: var(--shadow-hover);
+            border-color: var(--accent);
+        }
+
+        .gallery-item .gallery-image {
+            width: 100%;
+            height: 250px;
+            background: linear-gradient(135deg, var(--accent), var(--accent2));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 4rem;
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .gallery-item .gallery-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .gallery-item:hover .gallery-image img {
+            transform: scale(1.1);
+        }
+
+        .gallery-item .gallery-image .overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            padding: 2rem 1.5rem;
+            background: linear-gradient(transparent, rgba(0, 0, 0, 0.7));
+            color: white;
+            transform: translateY(100%);
+            transition: transform 0.4s ease;
+        }
+
+        .gallery-item:hover .gallery-image .overlay {
+            transform: translateY(0);
+        }
+
+        .gallery-item .gallery-image .overlay h4 {
+            font-size: 1.2rem;
+            font-weight: 600;
+        }
+
+        .gallery-item .gallery-image .overlay p {
+            font-size: 0.9rem;
+            opacity: 0.9;
+        }
+
+        .gallery-item .gallery-info {
+            padding: 1.2rem 1.5rem;
+        }
+
+        .gallery-item .gallery-info h4 {
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 0.3rem;
+        }
+
+        .gallery-item .gallery-info p {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+
+        .gallery-item .gallery-info .tag {
+            display: inline-block;
+            background: var(--light-bg);
+            padding: 0.2rem 0.8rem;
+            border-radius: 60px;
+            font-size: 0.7rem;
+            color: var(--text-light);
+            margin-top: 0.5rem;
+        }
+
+        /* Placeholder image styles - Replace src with actual images */
+        .gallery-item .gallery-image .placeholder-icon {
+            font-size: 4rem;
+            color: rgba(255, 255, 255, 0.8);
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .gallery-item .gallery-image .image-label {
+            position: absolute;
+            bottom: 1rem;
+            right: 1rem;
+            background: rgba(0, 0, 0, 0.5);
+            padding: 0.3rem 0.8rem;
+            border-radius: 60px;
+            font-size: 0.7rem;
+            color: white;
+            backdrop-filter: blur(5px);
+        }
+
+        /* ============================================================
                    SECTION STYLES
                    ============================================================ */
         .section-page {
@@ -392,7 +587,7 @@
         }
 
         /* ============================================================
-                   ABOUT SECTION - ENHANCED PROFESSIONAL
+                   ABOUT SECTION
                    ============================================================ */
         .about-hero {
             background: linear-gradient(135deg, var(--primary), var(--secondary));
@@ -1557,6 +1752,10 @@
             .about-mission-vision {
                 grid-template-columns: 1fr;
             }
+            .gallery-item {
+                min-width: 280px;
+                max-width: 280px;
+            }
         }
 
         @media (max-width: 900px) {
@@ -1609,6 +1808,14 @@
             }
             .about-team {
                 grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            }
+            .gallery-item {
+                min-width: 250px;
+                max-width: 250px;
+            }
+            .gallery-section .gallery-header {
+                flex-direction: column;
+                align-items: flex-start;
             }
         }
 
@@ -1732,6 +1939,13 @@
             .about-timeline .timeline-item .year {
                 min-width: auto;
             }
+            .gallery-item {
+                min-width: 200px;
+                max-width: 200px;
+            }
+            .gallery-item .gallery-image {
+                height: 180px;
+            }
         }
 
         @media (max-width: 400px) {
@@ -1747,6 +1961,10 @@
             }
             .about-team {
                 grid-template-columns: 1fr;
+            }
+            .gallery-item {
+                min-width: 170px;
+                max-width: 170px;
             }
         }
 
@@ -1880,9 +2098,10 @@
                         <span>NOVA</span>
                     </div>
                     <div class="nav-links">
+                        <a href="#gallery" data-section="gallery">Gallery</a>
                         <a href="#research" data-section="research">Research</a>
                         <a href="#products" data-section="products">Products</a>
-                        <a href="#about" class="active" data-section="about">About</a>
+                        <a href="#about" data-section="about">About</a>
                         <a href="#careers" data-section="careers">Careers</a>
                         <a href="#blog" data-section="blog">Blog</a>
                         <button class="btn-outline" id="contactBtn">
@@ -1908,6 +2127,159 @@
                     <button class="btn-outline" id="heroLearn">
                         <i class="fas fa-play-circle"></i> Learn More
                     </button>
+                </div>
+            </section>
+
+            <!-- ============================================================
+            GALLERY SECTION - HORIZONTAL SCROLL
+            ============================================================ -->
+            <section class="gallery-section" id="gallery">
+                <div class="gallery-header">
+                    <h2><i class="fas fa-images"></i> Technology Gallery</h2>
+                    <div class="gallery-nav">
+                        <button id="galleryPrev" aria-label="Previous"><i class="fas fa-chevron-left"></i></button>
+                        <button id="galleryNext" aria-label="Next"><i class="fas fa-chevron-right"></i></button>
+                    </div>
+                </div>
+                <div class="gallery-wrapper" id="galleryWrapper">
+                    <div class="gallery-track" id="galleryTrack">
+                        <!-- Gallery Item 1 - Replace src with your image path -->
+                        <div class="gallery-item">
+                            <div class="gallery-image">
+                                <!-- Replace the src below with your actual image path -->
+                                <img src="C:\Users\ramku\OneDrive\Desktop\RoboticsandRehab\img\l.jpeg" alt="NOVA-H1 Robot" />
+                                <div class="overlay">
+                                    <h4>NOVA-H1 Humanoid</h4>
+                                    <p>Advanced bipedal locomotion system</p>
+                                </div>
+                                <span class="image-label">Robotics</span>
+                            </div>
+                            <div class="gallery-info">
+                                <h4>NOVA-H1 Humanoid Robot</h4>
+                                <p>28 DOF · 1.7m · 65kg</p>
+                                <span class="tag">Featured</span>
+                            </div>
+                        </div>
+
+                        <!-- Gallery Item 2 -->
+                        <div class="gallery-item">
+                            <div class="gallery-image">
+                                <img src="https://placehold.co/600x400/6c5ce7/ffffff?text=Dexterous+Hand" alt="Dexterous Hand" />
+                                <div class="overlay">
+                                    <h4>Dexterous Hand</h4>
+                                    <p>Precision manipulation with tactile sensing</p>
+                                </div>
+                                <span class="image-label">Robotics</span>
+                            </div>
+                            <div class="gallery-info">
+                                <h4>Dexterous Robotic Hand</h4>
+                                <p>16 DOF · 28 sensors · 1.2kg</p>
+                                <span class="tag">Featured</span>
+                            </div>
+                        </div>
+
+                        <!-- Gallery Item 3 -->
+                        <div class="gallery-item">
+                            <div class="gallery-image">
+                                <img src="https://placehold.co/600x400/00b894/ffffff?text=Exo-Lite" alt="Exo-Lite" />
+                                <div class="overlay">
+                                    <h4>Exo-Lite</h4>
+                                    <p>Upper limb rehabilitation exoskeleton</p>
+                                </div>
+                                <span class="image-label">Rehabilitation</span>
+                            </div>
+                            <div class="gallery-info">
+                                <h4>Exo-Lite Upper Limb</h4>
+                                <p>2.5kg · 3 DOF · 8h battery</p>
+                                <span class="tag">Popular</span>
+                            </div>
+                        </div>
+
+                        <!-- Gallery Item 4 -->
+                        <div class="gallery-item">
+                            <div class="gallery-image">
+                                <img src="https://placehold.co/600x400/e74c3c/ffffff?text=Gait-Aid" alt="Gait-Aid" />
+                                <div class="overlay">
+                                    <h4>Gait-Aid</h4>
+                                    <p>Lower limb gait training system</p>
+                                </div>
+                                <span class="image-label">Rehabilitation</span>
+                            </div>
+                            <div class="gallery-info">
+                                <h4>Gait-Aid Lower Limb</h4>
+                                <p>6 DOF · 4.8kg · 12h battery</p>
+                                <span class="tag">Popular</span>
+                            </div>
+                        </div>
+
+                        <!-- Gallery Item 5 -->
+                        <div class="gallery-item">
+                            <div class="gallery-image">
+                                <img src="https://placehold.co/600x400/f39c12/ffffff?text=Neuro-Control" alt="Neuro-Control" />
+                                <div class="overlay">
+                                    <h4>Neuro-Control</h4>
+                                    <p>Edge AI for real-time robotics</p>
+                                </div>
+                                <span class="image-label">AI & Software</span>
+                            </div>
+                            <div class="gallery-info">
+                                <h4>Neuro-Control Edge AI</h4>
+                                <p>6 TOPS · 5W · 30 FPS</p>
+                                <span class="tag">New</span>
+                            </div>
+                        </div>
+
+                        <!-- Gallery Item 6 -->
+                        <div class="gallery-item">
+                            <div class="gallery-image">
+                                <img src="https://placehold.co/600x400/1f8bff/ffffff?text=Neuro-Stim" alt="Neuro-Stim" />
+                                <div class="overlay">
+                                    <h4>Neuro-Stim</h4>
+                                    <p>FES system for neuro-rehabilitation</p>
+                                </div>
+                                <span class="image-label">Rehabilitation</span>
+                            </div>
+                            <div class="gallery-info">
+                                <h4>Neuro-Stim FES System</h4>
+                                <p>32 channels · 10h battery</p>
+                                <span class="tag">New</span>
+                            </div>
+                        </div>
+
+                        <!-- Gallery Item 7 - Duplicate for infinite scroll effect -->
+                        <div class="gallery-item">
+                            <div class="gallery-image">
+                                <img src="https://placehold.co/600x400/6c5ce7/ffffff?text=Research+Lab" alt="Research Lab" />
+                                <div class="overlay">
+                                    <h4>Research Lab</h4>
+                                    <p>Cutting-edge robotics research</p>
+                                </div>
+                                <span class="image-label">Research</span>
+                            </div>
+                            <div class="gallery-info">
+                                <h4>Advanced Research Lab</h4>
+                                <p>12+ prototypes · 47 publications</p>
+                                <span class="tag">Innovation</span>
+                            </div>
+                        </div>
+
+                        <!-- Gallery Item 8 -->
+                        <div class="gallery-item">
+                            <div class="gallery-image">
+                                <img src="https://placehold.co/600x400/e74c3c/ffffff?text=Clinical+Trial" alt="Clinical Trial" />
+                                <div class="overlay">
+                                    <h4>Clinical Trials</h4>
+                                    <p>Patient-centered rehabilitation research</p>
+                                </div>
+                                <span class="image-label">Clinical</span>
+                            </div>
+                            <div class="gallery-info">
+                                <h4>Clinical Research</h4>
+                                <p>8 trials · 200+ patients</p>
+                                <span class="tag">Ongoing</span>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </section>
 
@@ -1982,7 +2354,7 @@
                 </div>
 
                 <div class="products-grid" id="productsGrid">
-                    <!-- Product 1: NOVA-H1 -->
+                    <!-- Product cards remain the same -->
                     <div class="product-card" data-category="robotics" data-product="NOVA-H1">
                         <span class="product-badge new">New</span>
                         <div class="product-image" style="background:linear-gradient(135deg,#1f8bff,#6c5ce7);">
@@ -2010,7 +2382,6 @@
                         </div>
                     </div>
 
-                    <!-- Product 2: Dexterous Hand -->
                     <div class="product-card" data-category="robotics" data-product="Dexterous Hand">
                         <span class="product-badge featured">Featured</span>
                         <div class="product-image" style="background:linear-gradient(135deg,#6c5ce7,#1f8bff);">
@@ -2038,7 +2409,6 @@
                         </div>
                     </div>
 
-                    <!-- Product 3: Neuro-Control -->
                     <div class="product-card" data-category="ai" data-product="Neuro-Control">
                         <span class="product-badge new">New</span>
                         <div class="product-image" style="background:linear-gradient(135deg,#00b894,#1f8bff);">
@@ -2066,7 +2436,6 @@
                         </div>
                     </div>
 
-                    <!-- Product 4: Exo-Lite -->
                     <div class="product-card" data-category="rehab" data-product="Exo-Lite">
                         <span class="product-badge hot">Popular</span>
                         <div class="product-image" style="background:linear-gradient(135deg,#fd79a8,#6c5ce7);">
@@ -2094,7 +2463,6 @@
                         </div>
                     </div>
 
-                    <!-- Product 5: Gait-Aid -->
                     <div class="product-card" data-category="rehab" data-product="Gait-Aid">
                         <span class="product-badge hot">Popular</span>
                         <div class="product-image" style="background:linear-gradient(135deg,#1f8bff,#00b894);">
@@ -2122,7 +2490,6 @@
                         </div>
                     </div>
 
-                    <!-- Product 6: Neuro-Stim -->
                     <div class="product-card" data-category="rehab" data-product="Neuro-Stim">
                         <span class="product-badge new">New</span>
                         <div class="product-image" style="background:linear-gradient(135deg,#6c5ce7,#fd79a8);">
@@ -2153,10 +2520,14 @@
             </section>
 
             <!-- ============================================================
-            ABOUT SECTION - PROFESSIONAL & DETAILED
+            ABOUT SECTION
             ============================================================ -->
             <section class="section-page" id="about">
-                <!-- About Hero -->
+                <div class="section-title">
+                    <i class="fas fa-building"></i> About NOVA Technologies
+                </div>
+                <p class="section-subtitle">We are a deep-tech company with a dual mission: advancing humanoid robotics and transforming rehabilitation. Founded in 2018 by engineers and clinicians, we combine cutting-edge research with clinical expertise to create solutions that improve lives.</p>
+
                 <div class="about-hero">
                     <div class="about-hero-content">
                         <h2>Building the Future of Human-Machine Interaction</h2>
@@ -2182,7 +2553,6 @@
                     </div>
                 </div>
 
-                <!-- Mission & Vision -->
                 <div class="about-mission-vision">
                     <div class="mv-card">
                         <div class="mv-icon"><i class="fas fa-bullseye"></i></div>
@@ -2196,7 +2566,6 @@
                     </div>
                 </div>
 
-                <!-- Core Values -->
                 <h3 style="font-size:2rem; font-weight:700; margin:2rem 0 1rem;">Our Core Values</h3>
                 <div class="about-values">
                     <div class="value-card">
@@ -2231,7 +2600,6 @@
                     </div>
                 </div>
 
-                <!-- Company Timeline -->
                 <h3 style="font-size:2rem; font-weight:700; margin:2rem 0 1rem;">Our Journey</h3>
                 <div class="about-timeline">
                     <div class="timeline-item">
@@ -2299,37 +2667,36 @@
                     </div>
                 </div>
 
-                <!-- Leadership Team -->
                 <h3 style="font-size:2rem; font-weight:700; margin:2rem 0 1rem;">Leadership Team</h3>
                 <div class="about-team">
                     <div class="team-member">
                         <div class="avatar">JD</div>
-                        <h4>Dr. Jane Doe</h4>
+                        <h4>Dr. Karthikeyan</h4>
                         <div class="role">CEO & Co-Founder</div>
                     </div>
                     <div class="team-member">
                         <div class="avatar">MS</div>
-                        <h4>Dr. Mark Smith</h4>
+                        <h4>Dr. Sudharsan</h4>
                         <div class="role">Chief Technology Officer</div>
                     </div>
                     <div class="team-member">
                         <div class="avatar">AL</div>
-                        <h4>Prof. Anna Lee</h4>
+                        <h4>Prof. Harish</h4>
                         <div class="role">Chief Scientific Officer</div>
                     </div>
                     <div class="team-member">
                         <div class="avatar">RJ</div>
-                        <h4>Robert Johnson</h4>
+                        <h4>Roshan</h4>
                         <div class="role">VP of Engineering</div>
                     </div>
                     <div class="team-member">
                         <div class="avatar">SW</div>
-                        <h4>Sarah Williams</h4>
+                        <h4>Ram</h4>
                         <div class="role">VP of Clinical Affairs</div>
                     </div>
                     <div class="team-member">
                         <div class="avatar">MC</div>
-                        <h4>Michael Chen</h4>
+                        <h4>Dorii</h4>
                         <div class="role">VP of Product</div>
                     </div>
                 </div>
@@ -2470,6 +2837,152 @@
                     toast.classList.remove('show');
                 }, 3500);
             }
+
+            // ============================================================
+            // GALLERY - HORIZONTAL SCROLL WITH SMOOTH EFFECTS
+            // ============================================================
+            const track = document.getElementById('galleryTrack');
+            const wrapper = document.getElementById('galleryWrapper');
+            const prevBtn = document.getElementById('galleryPrev');
+            const nextBtn = document.getElementById('galleryNext');
+
+            let currentIndex = 0;
+            let itemWidth = 320 + 24; // item width + gap
+            let visibleItems = 3;
+            let totalItems = document.querySelectorAll('.gallery-item').length;
+            let isDragging = false;
+            let startX = 0;
+            let currentTranslate = 0;
+            let prevTranslate = 0;
+            let animationID = 0;
+
+            // Calculate visible items based on screen width
+            function calculateVisibleItems() {
+                const wrapperWidth = wrapper.offsetWidth;
+                if (wrapperWidth < 500) {
+                    visibleItems = 1;
+                    itemWidth = 200 + 24;
+                } else if (wrapperWidth < 768) {
+                    visibleItems = 2;
+                    itemWidth = 250 + 24;
+                } else if (wrapperWidth < 1024) {
+                    visibleItems = 3;
+                    itemWidth = 280 + 24;
+                } else {
+                    visibleItems = 4;
+                    itemWidth = 320 + 24;
+                }
+                // Update item width based on actual items
+                const items = document.querySelectorAll('.gallery-item');
+                if (items.length > 0) {
+                    const firstItemWidth = items[0].offsetWidth;
+                    if (firstItemWidth > 0) {
+                        itemWidth = firstItemWidth + 24;
+                    }
+                }
+            }
+
+            function goToSlide(index) {
+                const maxIndex = totalItems - visibleItems;
+                if (index < 0) index = 0;
+                if (index > maxIndex) index = maxIndex;
+                currentIndex = index;
+                const translateX = -currentIndex * itemWidth;
+                track.style.transform = `translateX(${translateX}px)`;
+            }
+
+            function nextSlide() {
+                const maxIndex = totalItems - visibleItems;
+                if (currentIndex < maxIndex) {
+                    goToSlide(currentIndex + 1);
+                } else {
+                    goToSlide(0);
+                }
+            }
+
+            function prevSlide() {
+                if (currentIndex > 0) {
+                    goToSlide(currentIndex - 1);
+                } else {
+                    const maxIndex = totalItems - visibleItems;
+                    goToSlide(maxIndex);
+                }
+            }
+
+            // Next/Prev buttons
+            nextBtn.addEventListener('click', () => {
+                nextSlide();
+                showToast('➡️ Scrolling gallery forward', 'fa-arrow-right');
+            });
+
+            prevBtn.addEventListener('click', () => {
+                prevSlide();
+                showToast('⬅️ Scrolling gallery backward', 'fa-arrow-left');
+            });
+
+            // Drag functionality
+            wrapper.addEventListener('mousedown', dragStart);
+            wrapper.addEventListener('mousemove', dragMove);
+            wrapper.addEventListener('mouseup', dragEnd);
+            wrapper.addEventListener('mouseleave', dragEnd);
+
+            wrapper.addEventListener('touchstart', dragStart);
+            wrapper.addEventListener('touchmove', dragMove);
+            wrapper.addEventListener('touchend', dragEnd);
+
+            function dragStart(e) {
+                isDragging = true;
+                startX = e.type.includes('mouse') ? e.pageX : e.touches[0].clientX;
+                prevTranslate = currentTranslate;
+                track.style.transition = 'none';
+                wrapper.style.cursor = 'grabbing';
+            }
+
+            function dragMove(e) {
+                if (!isDragging) return;
+                const currentX = e.type.includes('mouse') ? e.pageX : e.touches[0].clientX;
+                const diff = currentX - startX;
+                currentTranslate = prevTranslate + diff;
+                track.style.transform = `translateX(${currentTranslate}px)`;
+            }
+
+            function dragEnd(e) {
+                if (!isDragging) return;
+                isDragging = false;
+                wrapper.style.cursor = 'grab';
+                track.style.transition = 'transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94)';
+
+                const movedBy = currentTranslate - prevTranslate;
+                const maxIndex = totalItems - visibleItems;
+                const index = Math.round(-currentTranslate / itemWidth);
+                const clampedIndex = Math.max(0, Math.min(index, maxIndex));
+
+                goToSlide(clampedIndex);
+            }
+
+            // Gallery item click
+            document.querySelectorAll('.gallery-item').forEach((item, index) => {
+                item.addEventListener('click', function() {
+                    const title = this.querySelector('.gallery-info h4')?.textContent || 'Gallery item';
+                    showToast(`🖼️ Viewing: ${title}`, 'fa-image');
+                });
+            });
+
+            // Handle resize
+            let resizeTimeout;
+            window.addEventListener('resize', () => {
+                clearTimeout(resizeTimeout);
+                resizeTimeout = setTimeout(() => {
+                    calculateVisibleItems();
+                    goToSlide(currentIndex);
+                }, 250);
+            });
+
+            // Initialize gallery
+            setTimeout(() => {
+                calculateVisibleItems();
+                goToSlide(0);
+            }, 100);
 
             // ============================================================
             // PRODUCT DATA
@@ -2994,7 +3507,7 @@
             // NAVIGATION
             // ============================================================
             const navLinks = document.querySelectorAll('.nav-links a[href^="#"]');
-            const sections = document.querySelectorAll('.section-page');
+            const sections = document.querySelectorAll('.section-page, .gallery-section');
 
             navLinks.forEach(link => {
                 link.addEventListener('click', function(e) {
@@ -3185,8 +3698,8 @@
                 showToast('✉️ press@novatech.ai | support@novatech.ai', 'fa-envelope');
             });
 
-            console.log('🚀 NOVA Landing Page - Super Professional About Section!');
-            console.log('📊 About section includes: Hero, Mission, Vision, Values, Timeline, Leadership Team');
+            console.log('🚀 NOVA Landing Page - With Gallery Section!');
+            console.log('📸 Gallery images use placeholder images. Replace src with your actual images.');
 
         })();
     </script>
