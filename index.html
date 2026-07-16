@@ -101,6 +101,35 @@
             }
         }
 
+        @keyframes float {
+            0%,
+            100% {
+                transform: translateY(0px);
+            }
+            50% {
+                transform: translateY(-10px);
+            }
+        }
+
+        @keyframes pulse {
+            0%,
+            100% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.05);
+            }
+        }
+
+        @keyframes shimmer {
+            0% {
+                background-position: -200% center;
+            }
+            100% {
+                background-position: 200% center;
+            }
+        }
+
         /* ============================================================
                    HEADER / NAVBAR
                    ============================================================ */
@@ -363,7 +392,228 @@
         }
 
         /* ============================================================
-                   RESEARCH DETAIL PAGE (Full page replacement)
+                   ABOUT SECTION - ENHANCED PROFESSIONAL
+                   ============================================================ */
+        .about-hero {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            border-radius: 2rem;
+            padding: 4rem 3rem;
+            color: white;
+            margin-bottom: 3rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .about-hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -20%;
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, rgba(31, 139, 255, 0.1) 0%, transparent 70%);
+            border-radius: 50%;
+        }
+
+        .about-hero .about-hero-content {
+            position: relative;
+            z-index: 1;
+        }
+
+        .about-hero .about-hero-content h2 {
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+
+        .about-hero .about-hero-content p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            max-width: 700px;
+            line-height: 1.8;
+        }
+
+        .about-hero .about-hero-stats {
+            display: flex;
+            gap: 3rem;
+            margin-top: 2.5rem;
+            flex-wrap: wrap;
+        }
+
+        .about-hero .about-hero-stats .stat {
+            text-align: center;
+        }
+
+        .about-hero .about-hero-stats .stat .number {
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: var(--accent);
+        }
+
+        .about-hero .about-hero-stats .stat .label {
+            font-size: 0.9rem;
+            opacity: 0.8;
+        }
+
+        .about-mission-vision {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            margin: 3rem 0;
+        }
+
+        .about-mission-vision .mv-card {
+            background: var(--card-bg);
+            padding: 2.5rem;
+            border-radius: 1.5rem;
+            border: 1px solid var(--border-color);
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+        }
+
+        .about-mission-vision .mv-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-hover);
+        }
+
+        .about-mission-vision .mv-card .mv-icon {
+            font-size: 3rem;
+            color: var(--accent);
+            margin-bottom: 1rem;
+        }
+
+        .about-mission-vision .mv-card h3 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 0.8rem;
+        }
+
+        .about-mission-vision .mv-card p {
+            color: var(--text-secondary);
+            line-height: 1.8;
+        }
+
+        .about-values {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin: 3rem 0;
+        }
+
+        .about-values .value-card {
+            background: var(--card-bg);
+            padding: 2rem;
+            border-radius: 1.5rem;
+            border: 1px solid var(--border-color);
+            text-align: center;
+            transition: var(--transition);
+        }
+
+        .about-values .value-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-hover);
+            border-color: var(--accent);
+        }
+
+        .about-values .value-card .value-icon {
+            font-size: 2.5rem;
+            color: var(--accent);
+            margin-bottom: 1rem;
+        }
+
+        .about-values .value-card h4 {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .about-values .value-card p {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+
+        .about-timeline {
+            margin: 3rem 0;
+        }
+
+        .about-timeline .timeline-item {
+            display: flex;
+            gap: 2rem;
+            padding: 1.5rem 0;
+            border-bottom: 1px solid var(--border-color);
+            align-items: flex-start;
+        }
+
+        .about-timeline .timeline-item:last-child {
+            border-bottom: none;
+        }
+
+        .about-timeline .timeline-item .year {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--accent);
+            min-width: 80px;
+        }
+
+        .about-timeline .timeline-item .content h4 {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 0.3rem;
+        }
+
+        .about-timeline .timeline-item .content p {
+            color: var(--text-secondary);
+            line-height: 1.6;
+        }
+
+        .about-team {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            margin: 3rem 0;
+        }
+
+        .about-team .team-member {
+            background: var(--card-bg);
+            padding: 2rem 1.5rem;
+            border-radius: 1.5rem;
+            border: 1px solid var(--border-color);
+            text-align: center;
+            transition: var(--transition);
+        }
+
+        .about-team .team-member:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-hover);
+        }
+
+        .about-team .team-member .avatar {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--accent), var(--accent2));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1rem;
+            font-size: 2rem;
+            color: white;
+            font-weight: 700;
+        }
+
+        .about-team .team-member h4 {
+            font-size: 1.1rem;
+            font-weight: 600;
+        }
+
+        .about-team .team-member .role {
+            color: var(--text-light);
+            font-size: 0.9rem;
+        }
+
+        /* ============================================================
+                   RESEARCH DETAIL PAGE
                    ============================================================ */
         .research-detail-page {
             display: none;
@@ -1301,6 +1551,12 @@
             .section-title {
                 font-size: 2.2rem;
             }
+            .about-hero .about-hero-content h2 {
+                font-size: 2.5rem;
+            }
+            .about-mission-vision {
+                grid-template-columns: 1fr;
+            }
         }
 
         @media (max-width: 900px) {
@@ -1341,6 +1597,18 @@
             }
             .research-detail-page .detail-header h1 {
                 font-size: 2rem;
+            }
+            .about-hero {
+                padding: 3rem 2rem;
+            }
+            .about-hero .about-hero-stats {
+                gap: 2rem;
+            }
+            .about-values {
+                grid-template-columns: 1fr 1fr;
+            }
+            .about-team {
+                grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
             }
         }
 
@@ -1439,6 +1707,31 @@
             .product-modal-content .specs-grid {
                 grid-template-columns: 1fr 1fr;
             }
+            .about-hero {
+                padding: 2rem 1.5rem;
+            }
+            .about-hero .about-hero-content h2 {
+                font-size: 2rem;
+            }
+            .about-hero .about-hero-stats {
+                gap: 1.5rem;
+            }
+            .about-hero .about-hero-stats .stat .number {
+                font-size: 2rem;
+            }
+            .about-values {
+                grid-template-columns: 1fr;
+            }
+            .about-team {
+                grid-template-columns: 1fr 1fr;
+            }
+            .about-timeline .timeline-item {
+                flex-direction: column;
+                gap: 0.5rem;
+            }
+            .about-timeline .timeline-item .year {
+                min-width: auto;
+            }
         }
 
         @media (max-width: 400px) {
@@ -1450,6 +1743,9 @@
                 font-size: 0.8rem;
             }
             .product-modal-content .specs-grid {
+                grid-template-columns: 1fr;
+            }
+            .about-team {
                 grid-template-columns: 1fr;
             }
         }
@@ -1551,7 +1847,7 @@
     </div>
 
     <!-- ============================================================
-    RESEARCH DETAIL PAGE (Full page replacement)
+    RESEARCH DETAIL PAGE
     ============================================================ -->
     <div class="container" id="researchDetailContainer">
         <div class="research-detail-page" id="researchDetailPage">
@@ -1584,9 +1880,9 @@
                         <span>NOVA</span>
                     </div>
                     <div class="nav-links">
-                        <a href="#research" class="active" data-section="research">Research</a>
+                        <a href="#research" data-section="research">Research</a>
                         <a href="#products" data-section="products">Products</a>
-                        <a href="#about" data-section="about">About</a>
+                        <a href="#about" class="active" data-section="about">About</a>
                         <a href="#careers" data-section="careers">Careers</a>
                         <a href="#blog" data-section="blog">Blog</a>
                         <button class="btn-outline" id="contactBtn">
@@ -1857,33 +2153,184 @@
             </section>
 
             <!-- ============================================================
-            ABOUT SECTION
+            ABOUT SECTION - PROFESSIONAL & DETAILED
             ============================================================ -->
             <section class="section-page" id="about">
-                <div class="section-title">
-                    <i class="fas fa-building"></i> About NOVA Technologies
+                <!-- About Hero -->
+                <div class="about-hero">
+                    <div class="about-hero-content">
+                        <h2>Building the Future of Human-Machine Interaction</h2>
+                        <p>NOVA Technologies is a pioneering deep-tech company at the intersection of humanoid robotics and rehabilitation medicine. Founded in 2018, we've grown from a small research lab to a global leader in intelligent systems that enhance human capabilities and restore mobility.</p>
+                        <div class="about-hero-stats">
+                            <div class="stat">
+                                <div class="number">2018</div>
+                                <div class="label">Founded</div>
+                            </div>
+                            <div class="stat">
+                                <div class="number">85+</div>
+                                <div class="label">Team Members</div>
+                            </div>
+                            <div class="stat">
+                                <div class="number">20+</div>
+                                <div class="label">Countries</div>
+                            </div>
+                            <div class="stat">
+                                <div class="number">1500+</div>
+                                <div class="label">Clinical Sessions</div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <p class="section-subtitle">We are a deep-tech company with a dual mission: advancing humanoid robotics and transforming rehabilitation. Founded in 2018 by engineers and clinicians.</p>
-                <div class="section-grid">
-                    <div class="section-card">
-                        <div class="card-icon"><i class="fas fa-rocket"></i></div>
+
+                <!-- Mission & Vision -->
+                <div class="about-mission-vision">
+                    <div class="mv-card">
+                        <div class="mv-icon"><i class="fas fa-bullseye"></i></div>
                         <h3>Our Mission</h3>
-                        <p>To engineer intelligent systems that augment human capabilities, restore mobility, and push the boundaries of robotics and rehabilitation.</p>
+                        <p>To engineer intelligent systems that augment human capabilities, restore mobility for those in need, and push the boundaries of what's possible in robotics and rehabilitation. We are committed to creating technologies that empower individuals, enhance human potential, and contribute to a more inclusive and accessible world.</p>
                     </div>
-                    <div class="section-card">
-                        <div class="card-icon"><i class="fas fa-users"></i></div>
-                        <h3>Our Team & Culture</h3>
-                        <p>85+ dedicated professionals including roboticists, AI researchers, mechanical engineers, and clinical scientists.</p>
+                    <div class="mv-card">
+                        <div class="mv-icon"><i class="fas fa-eye"></i></div>
+                        <h3>Our Vision</h3>
+                        <p>A world where advanced robotics and rehabilitation technologies are seamlessly integrated into daily life, enabling everyone to live with dignity, independence, and full mobility. We envision a future where human-robot collaboration enhances human capabilities and creates new possibilities for healthcare, industry, and society.</p>
                     </div>
-                    <div class="section-card">
-                        <div class="card-icon"><i class="fas fa-globe"></i></div>
-                        <h3>Global Impact</h3>
-                        <p>Solutions deployed in 20+ countries with partnerships in 30+ universities and 45+ hospitals worldwide.</p>
+                </div>
+
+                <!-- Core Values -->
+                <h3 style="font-size:2rem; font-weight:700; margin:2rem 0 1rem;">Our Core Values</h3>
+                <div class="about-values">
+                    <div class="value-card">
+                        <div class="value-icon"><i class="fas fa-lightbulb"></i></div>
+                        <h4>Innovation</h4>
+                        <p>We push the boundaries of technology with bold thinking, rigorous research, and a commitment to developing solutions that solve real-world problems.</p>
                     </div>
-                    <div class="section-card">
-                        <div class="card-icon"><i class="fas fa-handshake"></i></div>
-                        <h3>Partnerships</h3>
-                        <p>Collaborating with MIT, Stanford University, Mayo Clinic, and the University of Tokyo.</p>
+                    <div class="value-card">
+                        <div class="value-icon"><i class="fas fa-users"></i></div>
+                        <h4>Collaboration</h4>
+                        <p>We believe that the best solutions emerge from diverse perspectives. We foster a culture of open collaboration across disciplines, institutions, and continents.</p>
+                    </div>
+                    <div class="value-card">
+                        <div class="value-icon"><i class="fas fa-heart"></i></div>
+                        <h4>Impact</h4>
+                        <p>Everything we do is driven by the desire to make a meaningful difference in people's lives. We measure success not just by technological achievement, but by real-world impact.</p>
+                    </div>
+                    <div class="value-card">
+                        <div class="value-icon"><i class="fas fa-shield-alt"></i></div>
+                        <h4>Integrity</h4>
+                        <p>We uphold the highest standards of ethical conduct, scientific rigor, and transparency in all our research, products, and partnerships.</p>
+                    </div>
+                    <div class="value-card">
+                        <div class="value-icon"><i class="fas fa-graduation-cap"></i></div>
+                        <h4>Excellence</h4>
+                        <p>We strive for excellence in everything we do — from research and development to manufacturing and customer support. Quality is never compromised.</p>
+                    </div>
+                    <div class="value-card">
+                        <div class="value-icon"><i class="fas fa-globe"></i></div>
+                        <h4>Sustainability</h4>
+                        <p>We are committed to sustainable practices in our operations and products, minimizing environmental impact while maximizing positive social outcomes.</p>
+                    </div>
+                </div>
+
+                <!-- Company Timeline -->
+                <h3 style="font-size:2rem; font-weight:700; margin:2rem 0 1rem;">Our Journey</h3>
+                <div class="about-timeline">
+                    <div class="timeline-item">
+                        <div class="year">2018</div>
+                        <div class="content">
+                            <h4>Foundation</h4>
+                            <p>NOVA Technologies was founded by a team of engineers and clinicians with a vision to bridge the gap between robotics and rehabilitation medicine.</p>
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="year">2019</div>
+                        <div class="content">
+                            <h4>First Prototype</h4>
+                            <p>Developed our first humanoid robot prototype and established research partnerships with leading academic institutions including MIT and Stanford.</p>
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="year">2020</div>
+                        <div class="content">
+                            <h4>Clinical Trials Begin</h4>
+                            <p>Launched clinical trials for our rehabilitation devices in collaboration with Mayo Clinic and Johns Hopkins, marking our entry into healthcare.</p>
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="year">2021</div>
+                        <div class="content">
+                            <h4>Global Expansion</h4>
+                            <p>Expanded operations to 15 countries, established our European research center, and secured Series A funding of $25M.</p>
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="year">2022</div>
+                        <div class="content">
+                            <h4>FDA Clearance</h4>
+                            <p>Received FDA clearance for our Exo-Lite device, marking a significant milestone in bringing our rehabilitation technology to patients.</p>
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="year">2023</div>
+                        <div class="content">
+                            <h4>Innovation Awards</h4>
+                            <p>Recognized with 5 industry awards for innovation in robotics and AI, including the prestigious Robotics Innovation Award.</p>
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="year">2024</div>
+                        <div class="content">
+                            <h4>New Product Launch</h4>
+                            <p>Launched NOVA-H1 humanoid robot and Neuro-Control AI platform, expanding our product portfolio to serve research and industrial markets.</p>
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="year">2025</div>
+                        <div class="content">
+                            <h4>Global Impact</h4>
+                            <p>Reached 1500+ clinical sessions, 45+ hospital partnerships, and 30+ university collaborations worldwide.</p>
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="year">2026</div>
+                        <div class="content">
+                            <h4>Future Forward</h4>
+                            <p>Continued innovation with new products in development, expanding our global presence, and advancing the frontiers of humanoid robotics and rehabilitation.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Leadership Team -->
+                <h3 style="font-size:2rem; font-weight:700; margin:2rem 0 1rem;">Leadership Team</h3>
+                <div class="about-team">
+                    <div class="team-member">
+                        <div class="avatar">JD</div>
+                        <h4>Dr. Jane Doe</h4>
+                        <div class="role">CEO & Co-Founder</div>
+                    </div>
+                    <div class="team-member">
+                        <div class="avatar">MS</div>
+                        <h4>Dr. Mark Smith</h4>
+                        <div class="role">Chief Technology Officer</div>
+                    </div>
+                    <div class="team-member">
+                        <div class="avatar">AL</div>
+                        <h4>Prof. Anna Lee</h4>
+                        <div class="role">Chief Scientific Officer</div>
+                    </div>
+                    <div class="team-member">
+                        <div class="avatar">RJ</div>
+                        <h4>Robert Johnson</h4>
+                        <div class="role">VP of Engineering</div>
+                    </div>
+                    <div class="team-member">
+                        <div class="avatar">SW</div>
+                        <h4>Sarah Williams</h4>
+                        <div class="role">VP of Clinical Affairs</div>
+                    </div>
+                    <div class="team-member">
+                        <div class="avatar">MC</div>
+                        <h4>Michael Chen</h4>
+                        <div class="role">VP of Product</div>
                     </div>
                 </div>
             </section>
@@ -2271,7 +2718,7 @@
             });
 
             // ============================================================
-            // PAGE SWITCHING - FIXED
+            // PAGE SWITCHING
             // ============================================================
             const mainPageContainer = document.getElementById('mainPageContainer');
             const researchDetailContainer = document.getElementById('researchDetailContainer');
@@ -2666,6 +3113,24 @@
             });
 
             // ============================================================
+            // ABOUT SECTION INTERACTIONS
+            // ============================================================
+            document.querySelectorAll('.mv-card, .value-card, .team-member').forEach(el => {
+                el.addEventListener('click', function() {
+                    const title = this.querySelector('h3, h4')?.textContent || 'Card';
+                    showToast(`📋 ${title} — Click for more details`, 'fa-info-circle');
+                });
+            });
+
+            document.querySelectorAll('.timeline-item').forEach(el => {
+                el.addEventListener('click', function() {
+                    const year = this.querySelector('.year')?.textContent || '';
+                    const title = this.querySelector('h4')?.textContent || '';
+                    showToast(`📅 ${year} — ${title}`, 'fa-calendar-alt');
+                });
+            });
+
+            // ============================================================
             // FOOTER LINKS
             // ============================================================
             document.getElementById('footerPrivacy').addEventListener('click', function(e) {
@@ -2720,8 +3185,8 @@
                 showToast('✉️ press@novatech.ai | support@novatech.ai', 'fa-envelope');
             });
 
-            console.log('🚀 NOVA Landing Page - Fully Fixed!');
-            console.log('📊 Research detail page now properly replaces main content.');
+            console.log('🚀 NOVA Landing Page - Super Professional About Section!');
+            console.log('📊 About section includes: Hero, Mission, Vision, Values, Timeline, Leadership Team');
 
         })();
     </script>
