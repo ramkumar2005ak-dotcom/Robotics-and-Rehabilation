@@ -10,7 +10,9 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700;14..32,800&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
     <style>
-        /* ===== RESET & BASE ===== */
+        /* ============================================================
+                   RESET & BASE
+                   ============================================================ */
         * {
             margin: 0;
             padding: 0;
@@ -46,7 +48,9 @@
             overflow-x: hidden;
         }
 
-        /* ===== SCROLLBAR ===== */
+        /* ============================================================
+                   SCROLLBAR
+                   ============================================================ */
         ::-webkit-scrollbar {
             width: 10px;
         }
@@ -61,14 +65,18 @@
             background: var(--accent);
         }
 
-        /* ===== CONTAINER ===== */
+        /* ============================================================
+                   CONTAINER
+                   ============================================================ */
         .container {
             max-width: 1280px;
             margin: 0 auto;
             padding: 0 2rem;
         }
 
-        /* ===== ANIMATIONS ===== */
+        /* ============================================================
+                   ANIMATIONS
+                   ============================================================ */
         @keyframes fadeInUp {
             from {
                 opacity: 0;
@@ -80,45 +88,12 @@
             }
         }
 
-        @keyframes float {
-            0%,
-            100% {
-                transform: translateY(0px);
-            }
-            50% {
-                transform: translateY(-10px);
-            }
-        }
-
-        @keyframes pulse {
-            0%,
-            100% {
-                transform: scale(1);
-            }
-            50% {
-                transform: scale(1.05);
-            }
-        }
-
-        @keyframes slideInLeft {
+        @keyframes fadeIn {
             from {
                 opacity: 0;
-                transform: translateX(-50px);
             }
             to {
                 opacity: 1;
-                transform: translateX(0);
-            }
-        }
-
-        @keyframes slideInRight {
-            from {
-                opacity: 0;
-                transform: translateX(50px);
-            }
-            to {
-                opacity: 1;
-                transform: translateX(0);
             }
         }
 
@@ -126,27 +101,21 @@
             animation: fadeInUp 0.8s ease forwards;
         }
 
-        .animate-slideLeft {
-            animation: slideInLeft 0.8s ease forwards;
-        }
-
-        .animate-slideRight {
-            animation: slideInRight 0.8s ease forwards;
-        }
-
-        .animate-float {
-            animation: float 3s ease-in-out infinite;
-        }
-
-        /* ===== HEADER / NAVBAR ===== */
+        /* ============================================================
+                   HEADER / NAVBAR
+                   ============================================================ */
         .navbar {
             display: flex;
             justify-content: space-between;
             align-items: center;
             padding: 1.5rem 0;
             flex-wrap: wrap;
-            position: relative;
-            z-index: 100;
+            position: sticky;
+            top: 0;
+            background: rgba(248, 250, 252, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            border-bottom: 1px solid var(--border-color);
         }
 
         .logo {
@@ -175,7 +144,7 @@
 
         .nav-links {
             display: flex;
-            gap: 2.5rem;
+            gap: 2rem;
             font-weight: 500;
             color: var(--secondary);
             align-items: center;
@@ -187,8 +156,8 @@
             color: inherit;
             transition: var(--transition);
             cursor: pointer;
-            position: relative;
             padding: 0.5rem 0;
+            position: relative;
         }
 
         .nav-links a::after {
@@ -202,11 +171,16 @@
             transition: var(--transition);
         }
 
-        .nav-links a:hover::after {
+        .nav-links a:hover::after,
+        .nav-links a.active::after {
             width: 100%;
         }
 
         .nav-links a:hover {
+            color: var(--accent);
+        }
+
+        .nav-links a.active {
             color: var(--accent);
         }
 
@@ -229,7 +203,9 @@
             box-shadow: 0 8px 20px rgba(31, 58, 95, 0.2);
         }
 
-        /* ===== HERO SECTION ===== */
+        /* ============================================================
+                   HERO SECTION
+                   ============================================================ */
         .hero {
             display: flex;
             flex-direction: column;
@@ -237,23 +213,6 @@
             text-align: center;
             padding: 4rem 0 5rem;
             position: relative;
-        }
-
-        .hero::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            right: -20%;
-            width: 600px;
-            height: 600px;
-            background: radial-gradient(circle, rgba(31, 139, 255, 0.05) 0%, transparent 70%);
-            border-radius: 50%;
-            z-index: 0;
-        }
-
-        .hero>* {
-            position: relative;
-            z-index: 1;
         }
 
         .hero-badge {
@@ -275,16 +234,15 @@
             background: var(--accent);
             color: white;
             transform: translateY(-2px);
-            box-shadow: 0 8px 25px rgba(31, 139, 255, 0.3);
-        }
-
-        .hero-badge:hover i {
-            color: white !important;
         }
 
         .hero-badge i {
             color: var(--accent);
             transition: var(--transition);
+        }
+
+        .hero-badge:hover i {
+            color: white;
         }
 
         .hero h1 {
@@ -311,395 +269,277 @@
             line-height: 1.7;
         }
 
-        .hero-actions {
+        /* ============================================================
+                   SECTION STYLES (All navigation sections)
+                   ============================================================ */
+        .section-page {
+            padding: 4rem 0 5rem;
+            border-top: 1px solid var(--border-color);
+            scroll-margin-top: 80px;
+        }
+
+        .section-page:first-of-type {
+            border-top: none;
+        }
+
+        .section-title {
+            font-size: 2.8rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
             display: flex;
+            align-items: center;
             gap: 1rem;
-            flex-wrap: wrap;
-            justify-content: center;
         }
 
-        /* ===== BUTTONS ===== */
-        .btn-primary {
-            background: var(--primary);
-            color: white;
-            border: none;
-            padding: 0.9rem 2.5rem;
-            border-radius: 60px;
-            font-weight: 600;
-            font-size: 1rem;
-            cursor: pointer;
-            transition: var(--transition);
-            display: inline-flex;
-            align-items: center;
-            gap: 10px;
-            text-decoration: none;
-            box-shadow: 0 4px 15px rgba(11, 26, 47, 0.2);
+        .section-title i {
+            color: var(--accent);
+            font-size: 2.5rem;
         }
 
-        .btn-primary i {
-            font-size: 0.9rem;
-            transition: var(--transition);
+        .section-subtitle {
+            font-size: 1.2rem;
+            color: var(--text-secondary);
+            margin-bottom: 2.5rem;
+            max-width: 700px;
         }
 
-        .btn-primary:hover {
-            background: var(--secondary);
-            transform: translateY(-3px);
-            box-shadow: 0 8px 30px rgba(11, 26, 47, 0.3);
-        }
-
-        .btn-primary:hover i {
-            transform: translateX(4px);
-        }
-
-        .btn-primary-outline {
-            background: transparent;
-            border: 2px solid var(--primary);
-            color: var(--primary);
-            padding: 0.9rem 2.5rem;
-            border-radius: 60px;
-            font-weight: 600;
-            font-size: 1rem;
-            cursor: pointer;
-            transition: var(--transition);
-            display: inline-flex;
-            align-items: center;
-            gap: 10px;
-            text-decoration: none;
-        }
-
-        .btn-primary-outline i {
-            font-size: 0.9rem;
-            transition: var(--transition);
-        }
-
-        .btn-primary-outline:hover {
-            background: var(--primary);
-            color: white;
-            transform: translateY(-3px);
-            box-shadow: 0 8px 30px rgba(11, 26, 47, 0.15);
-        }
-
-        .btn-primary-outline:hover i {
-            transform: translateX(4px);
-        }
-
-        .btn-accent {
-            background: var(--accent);
-            color: white;
-            border: none;
-            padding: 0.9rem 2.5rem;
-            border-radius: 60px;
-            font-weight: 600;
-            font-size: 1rem;
-            cursor: pointer;
-            transition: var(--transition);
-            display: inline-flex;
-            align-items: center;
-            gap: 10px;
-            text-decoration: none;
-            box-shadow: 0 4px 15px rgba(31, 139, 255, 0.3);
-        }
-
-        .btn-accent:hover {
-            background: #1976d9;
-            transform: translateY(-3px);
-            box-shadow: 0 8px 30px rgba(31, 139, 255, 0.4);
-        }
-
-        /* ===== PILLARS SECTION ===== */
-        .pillars {
+        .section-grid {
             display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 2.5rem;
-            padding: 3rem 0 5rem;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 1.5rem;
         }
 
-        .pillar-card {
+        .section-card {
             background: var(--card-bg);
-            border-radius: var(--radius);
-            padding: 2.8rem 2.5rem 3rem;
+            padding: 2rem;
+            border-radius: 1.5rem;
+            border: 1px solid var(--border-color);
             box-shadow: var(--shadow);
             transition: var(--transition);
-            display: flex;
-            flex-direction: column;
-            border: 1px solid var(--border-color);
-            position: relative;
-            overflow: hidden;
+            cursor: default;
         }
 
-        .pillar-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 4px;
-            background: linear-gradient(90deg, var(--accent), var(--accent2));
-            opacity: 0;
-            transition: var(--transition);
-        }
-
-        .pillar-card:hover::before {
-            opacity: 1;
-        }
-
-        .pillar-card:hover {
-            transform: translateY(-8px);
+        .section-card:hover {
+            transform: translateY(-5px);
             box-shadow: var(--shadow-hover);
         }
 
-        .pillar-icon {
-            font-size: 3.2rem;
-            margin-bottom: 1.2rem;
-            color: var(--secondary);
-            transition: var(--transition);
-        }
-
-        .pillar-card:hover .pillar-icon {
-            transform: scale(1.1) rotate(-5deg);
-        }
-
-        .pillar-card h2 {
-            font-size: 2.2rem;
-            font-weight: 700;
-            letter-spacing: -0.02em;
-            margin-bottom: 0.5rem;
-        }
-
-        .pillar-card .subtitle {
-            font-weight: 500;
+        .section-card .card-icon {
+            font-size: 2.5rem;
             color: var(--accent);
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
-            font-size: 0.8rem;
-            margin-bottom: 1.2rem;
-            display: flex;
-            align-items: center;
-            gap: 8px;
+            margin-bottom: 1rem;
         }
 
-        .pillar-card p {
+        .section-card h3 {
+            font-size: 1.3rem;
+            margin-bottom: 0.8rem;
+        }
+
+        .section-card p {
             color: var(--text-secondary);
-            margin-bottom: 2rem;
-            flex: 1;
             line-height: 1.7;
         }
 
-        .product-grid {
-            display: flex;
-            flex-direction: column;
-            gap: 1rem;
-            margin-top: 0.5rem;
-        }
-
-        .product-item {
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-            background: #f2f6fc;
-            padding: 0.9rem 1.4rem;
+        .section-card .tag {
+            display: inline-block;
+            background: var(--light-bg);
+            padding: 0.3rem 1rem;
             border-radius: 60px;
-            transition: var(--transition);
-            cursor: pointer;
-            border: 1px solid transparent;
-        }
-
-        .product-item:hover {
-            background: #e3ebf7;
-            border-color: var(--accent);
-            transform: translateX(6px);
-        }
-
-        .product-item i {
-            font-size: 1.5rem;
-            width: 2.4rem;
-            color: var(--secondary);
-            transition: var(--transition);
-        }
-
-        .product-item:hover i {
-            color: var(--accent);
-            transform: scale(1.1);
-        }
-
-        .product-item span {
+            font-size: 0.8rem;
             font-weight: 500;
-            flex: 1;
-        }
-
-        .product-item small {
             color: var(--text-light);
-            font-weight: 400;
-            background: white;
-            padding: 0.25rem 1.2rem;
-            border-radius: 60px;
-            font-size: 0.75rem;
-            transition: var(--transition);
-        }
-
-        .product-item:hover small {
-            background: var(--accent);
-            color: white;
-        }
-
-        .pillar-cta {
-            margin-top: 2rem;
-            display: flex;
-            gap: 1rem;
-            flex-wrap: wrap;
-        }
-
-        /* ===== DIVIDER ===== */
-        .divider-section {
-            text-align: center;
-            padding: 1rem 0 2rem;
-            border-top: 1px solid var(--border-color);
             margin-top: 1rem;
         }
 
-        .divider-section .tag {
-            display: inline-block;
-            background: #eef2f6;
-            padding: 0.6rem 2.5rem;
-            border-radius: 60px;
-            font-weight: 500;
-            color: var(--secondary);
-            font-size: 0.95rem;
-            letter-spacing: 0.02em;
-            cursor: pointer;
-            transition: var(--transition);
+        /* ============================================================
+                   PRODUCTS GRID (Special)
+                   ============================================================ */
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
         }
 
-        .divider-section .tag:hover {
-            background: var(--primary);
-            color: white;
-            transform: scale(1.05);
-        }
-
-        .divider-section .tag i {
-            margin: 0 8px;
-            color: var(--accent);
-            transition: var(--transition);
-        }
-
-        .divider-section .tag:hover i {
-            color: white;
-        }
-
-        /* ===== INNOVATION STATS ===== */
-        .innovation {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 3rem;
-            padding: 3.5rem 2rem;
-            background: white;
-            border-radius: 3rem;
-            margin: 2rem 0 2rem;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.03);
-            border: 1px solid var(--border-color);
-        }
-
-        .innovation-item {
-            text-align: center;
-            flex: 1 1 150px;
-            cursor: pointer;
-            transition: var(--transition);
-            padding: 1rem;
+        .product-card {
+            background: var(--card-bg);
+            padding: 2rem;
             border-radius: 1.5rem;
-        }
-
-        .innovation-item:hover {
-            background: var(--light-bg);
-            transform: translateY(-5px);
-        }
-
-        .innovation-item .number {
-            font-size: 2.8rem;
-            font-weight: 800;
-            color: var(--primary);
-            transition: var(--transition);
-        }
-
-        .innovation-item:hover .number {
-            color: var(--accent);
-        }
-
-        .innovation-item .label {
-            color: var(--text-light);
-            font-weight: 500;
-            margin-top: 0.3rem;
-        }
-
-        /* ===== TESTIMONIALS ===== */
-        .testimonials {
-            padding: 3rem 0 4rem;
-        }
-
-        .testimonials h2 {
+            border: 1px solid var(--border-color);
             text-align: center;
-            font-size: 2.5rem;
-            font-weight: 700;
-            margin-bottom: 3rem;
+            transition: var(--transition);
+            cursor: pointer;
         }
 
-        .testimonial-grid {
+        .product-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-hover);
+            border-color: var(--accent);
+        }
+
+        .product-card .product-icon {
+            font-size: 3rem;
+            color: var(--accent);
+            margin-bottom: 1rem;
+        }
+
+        .product-card h4 {
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .product-card p {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+        }
+
+        .product-card .badge {
+            display: inline-block;
+            background: var(--light-bg);
+            padding: 0.2rem 1rem;
+            border-radius: 60px;
+            font-size: 0.75rem;
+            color: var(--text-light);
+            margin-top: 0.8rem;
+        }
+
+        /* ============================================================
+                   BLOG SECTION
+                   ============================================================ */
+        .blog-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 2rem;
         }
 
-        .testimonial-card {
-            background: white;
-            padding: 2rem;
+        .blog-card {
+            background: var(--card-bg);
             border-radius: 1.5rem;
-            box-shadow: var(--shadow);
+            overflow: hidden;
             border: 1px solid var(--border-color);
             transition: var(--transition);
+            cursor: pointer;
         }
 
-        .testimonial-card:hover {
+        .blog-card:hover {
             transform: translateY(-5px);
             box-shadow: var(--shadow-hover);
         }
 
-        .testimonial-card .quote {
-            font-size: 1.1rem;
-            color: var(--text-secondary);
-            line-height: 1.7;
-            margin-bottom: 1.5rem;
-            font-style: italic;
-        }
-
-        .testimonial-card .author {
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-        }
-
-        .testimonial-card .author .avatar {
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            background: var(--accent);
+        .blog-card .blog-image {
+            height: 200px;
+            background: linear-gradient(135deg, var(--accent), var(--accent2));
             display: flex;
             align-items: center;
             justify-content: center;
+            font-size: 4rem;
             color: white;
-            font-weight: 700;
-            font-size: 1.2rem;
+            opacity: 0.8;
         }
 
-        .testimonial-card .author .name {
-            font-weight: 600;
+        .blog-card .blog-content {
+            padding: 1.5rem;
         }
 
-        .testimonial-card .author .role {
+        .blog-card .blog-content .blog-tag {
+            display: inline-block;
+            background: var(--light-bg);
+            padding: 0.2rem 1rem;
+            border-radius: 60px;
+            font-size: 0.75rem;
             color: var(--text-light);
+            margin-bottom: 0.8rem;
+        }
+
+        .blog-card .blog-content h4 {
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .blog-card .blog-content p {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+        }
+
+        /* ============================================================
+                   CAREERS SECTION
+                   ============================================================ */
+        .career-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.5rem;
+            background: var(--card-bg);
+            border-radius: 1rem;
+            border: 1px solid var(--border-color);
+            margin-bottom: 1rem;
+            transition: var(--transition);
+            cursor: pointer;
+        }
+
+        .career-item:hover {
+            border-color: var(--accent);
+            transform: translateX(5px);
+        }
+
+        .career-item .career-info h4 {
+            font-size: 1.1rem;
+            margin-bottom: 0.3rem;
+        }
+
+        .career-item .career-info p {
+            color: var(--text-secondary);
             font-size: 0.9rem;
         }
 
-        /* ===== FOOTER ===== */
+        .career-item .career-badge {
+            background: var(--light-bg);
+            padding: 0.3rem 1.2rem;
+            border-radius: 60px;
+            font-size: 0.8rem;
+            color: var(--text-light);
+        }
+
+        /* ============================================================
+                   TOAST
+                   ============================================================ */
+        .toast {
+            position: fixed;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%) translateY(100px);
+            background: var(--primary);
+            color: white;
+            padding: 16px 32px;
+            border-radius: 60px;
+            font-weight: 500;
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.25);
+            z-index: 999;
+            opacity: 0;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            pointer-events: none;
+            font-size: 0.95rem;
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            max-width: 90%;
+        }
+
+        .toast.show {
+            opacity: 1;
+            transform: translateX(-50%) translateY(0);
+            pointer-events: auto;
+        }
+
+        .toast i {
+            color: var(--accent);
+            font-size: 1.2rem;
+        }
+
+        /* ============================================================
+                   FOOTER
+                   ============================================================ */
         .footer {
             padding: 3.5rem 0 2.5rem;
             border-top: 1px solid var(--border-color);
@@ -743,42 +583,9 @@
             color: var(--accent);
         }
 
-        /* ===== TOAST NOTIFICATION ===== */
-        .toast {
-            position: fixed;
-            bottom: 30px;
-            left: 50%;
-            transform: translateX(-50%) translateY(100px);
-            background: var(--primary);
-            color: white;
-            padding: 16px 32px;
-            border-radius: 60px;
-            font-weight: 500;
-            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.25);
-            z-index: 999;
-            opacity: 0;
-            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-            pointer-events: none;
-            font-size: 0.95rem;
-            display: flex;
-            align-items: center;
-            gap: 14px;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            max-width: 90%;
-        }
-
-        .toast.show {
-            opacity: 1;
-            transform: translateX(-50%) translateY(0);
-            pointer-events: auto;
-        }
-
-        .toast i {
-            color: var(--accent);
-            font-size: 1.2rem;
-        }
-
-        /* ===== BACK TO TOP ===== */
+        /* ============================================================
+                   BACK TO TOP
+                   ============================================================ */
         .back-to-top {
             position: fixed;
             bottom: 100px;
@@ -810,38 +617,41 @@
             transform: translateY(-5px);
         }
 
-        /* ===== RESPONSIVE ===== */
+        /* ============================================================
+                   RESPONSIVE
+                   ============================================================ */
         @media (max-width: 1024px) {
             .hero h1 {
                 font-size: 3.2rem;
             }
+            .section-title {
+                font-size: 2.2rem;
+            }
         }
 
         @media (max-width: 900px) {
-            .pillars {
-                grid-template-columns: 1fr;
-                gap: 2rem;
-            }
-
-            .hero h1 {
-                font-size: 2.8rem;
-            }
-
             .navbar {
                 flex-direction: column;
                 align-items: flex-start;
                 gap: 1rem;
             }
-
             .nav-links {
-                gap: 1.5rem;
+                gap: 1.2rem;
                 width: 100%;
                 justify-content: flex-start;
+                flex-wrap: wrap;
             }
-
-            .innovation {
-                gap: 2rem;
-                padding: 2.5rem 1.5rem;
+            .hero h1 {
+                font-size: 2.8rem;
+            }
+            .section-grid {
+                grid-template-columns: 1fr;
+            }
+            .products-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+            .blog-grid {
+                grid-template-columns: 1fr;
             }
         }
 
@@ -849,73 +659,48 @@
             .container {
                 padding: 0 1.2rem;
             }
-
             .hero h1 {
                 font-size: 2.2rem;
             }
-
             .hero p {
                 font-size: 1.1rem;
             }
-
-            .pillar-card {
-                padding: 1.8rem 1.2rem;
+            .section-title {
+                font-size: 1.8rem;
+                flex-wrap: wrap;
             }
-
-            .pillar-card h2 {
+            .section-title i {
                 font-size: 1.8rem;
             }
-
-            .product-item {
-                flex-wrap: wrap;
-                padding: 0.8rem 1rem;
-                border-radius: 30px;
+            .products-grid {
+                grid-template-columns: 1fr;
             }
-
-            .product-item small {
-                margin-left: 0;
-                width: 100%;
-                text-align: right;
-                padding: 0.2rem 0.8rem;
+            .nav-links {
+                gap: 0.8rem;
+                font-size: 0.9rem;
             }
-
-            .btn-primary,
-            .btn-primary-outline,
-            .btn-accent {
-                width: 100%;
-                justify-content: center;
+            .btn-outline {
+                padding: 0.4rem 1rem;
+                font-size: 0.85rem;
             }
-
-            .pillar-cta {
+            .career-item {
                 flex-direction: column;
+                align-items: flex-start;
+                gap: 0.8rem;
             }
-
-            .innovation {
-                gap: 1.2rem;
-                padding: 2rem 1rem;
-                border-radius: 2rem;
-            }
-
-            .innovation-item .number {
-                font-size: 2rem;
-            }
-
             .footer {
                 flex-direction: column;
                 align-items: center;
                 text-align: center;
             }
-
-            .testimonial-grid {
-                grid-template-columns: 1fr;
+            .footer .footer-links {
+                justify-content: center;
             }
-
             .toast {
                 padding: 14px 20px;
                 font-size: 0.85rem;
                 bottom: 20px;
             }
-
             .back-to-top {
                 width: 40px;
                 height: 40px;
@@ -928,97 +713,46 @@
             .hero h1 {
                 font-size: 1.8rem;
             }
-
             .nav-links {
-                gap: 1rem;
-                font-size: 0.9rem;
+                gap: 0.6rem;
+                font-size: 0.8rem;
             }
-
-            .btn-outline {
-                padding: 0.4rem 1rem;
-                font-size: 0.85rem;
-            }
-        }
-
-        /* ===== UTILITY ===== */
-        .text-center {
-            text-align: center;
-        }
-        .mt-2 {
-            margin-top: 2rem;
-        }
-        .mb-2 {
-            margin-bottom: 2rem;
-        }
-
-        /* ===== PILLAR CARD VARIATIONS ===== */
-        .pillar-card:nth-child(1) .pillar-icon {
-            color: var(--accent);
-        }
-        .pillar-card:nth-child(2) .pillar-icon {
-            color: var(--accent2);
-        }
-
-        .pillar-card:nth-child(1) .product-item i {
-            color: var(--accent);
-        }
-        .pillar-card:nth-child(2) .product-item i {
-            color: var(--accent2);
-        }
-
-        .pillar-card:nth-child(1) .subtitle {
-            color: var(--accent);
-        }
-        .pillar-card:nth-child(2) .subtitle {
-            color: var(--accent2);
-        }
-
-        /* ===== SECTION TITLE ===== */
-        .section-title {
-            font-size: 2.5rem;
-            font-weight: 700;
-            text-align: center;
-            margin-bottom: 1rem;
-        }
-
-        .section-subtitle {
-            text-align: center;
-            color: var(--text-secondary);
-            font-size: 1.1rem;
-            max-width: 600px;
-            margin: 0 auto 3rem;
         }
     </style>
 </head>
 <body>
 
-    <!-- ===== TOAST NOTIFICATION ===== -->
+    <!-- ============================================================
+    TOAST NOTIFICATION
+    ============================================================ -->
     <div id="toast" class="toast">
         <i class="fas fa-check-circle"></i>
-        <span id="toastMessage">Action triggered successfully</span>
+        <span id="toastMessage">Action triggered</span>
     </div>
 
-    <!-- ===== BACK TO TOP BUTTON ===== -->
+    <!-- ============================================================
+    BACK TO TOP
+    ============================================================ -->
     <button id="backToTop" class="back-to-top" aria-label="Back to top">
         <i class="fas fa-arrow-up"></i>
     </button>
 
-    <!-- ===== MAIN CONTAINER ===== -->
+    <!-- ============================================================
+    HEADER
+    ============================================================ -->
     <div class="container">
-
-        <!-- ===== HEADER ===== -->
         <header>
-            <nav class="navbar">
+            <nav class="navbar" id="navbar">
                 <div class="logo" id="logo">
                     <i class="fas fa-robot"></i>
                     <span>NOVA</span>
                 </div>
                 <div class="nav-links">
-                    <a href="#" id="navResearch">Research</a>
-                    <a href="#" id="navProducts">Products</a>
-                    <a href="#" id="navAbout">About</a>
-                    <a href="#" id="navCareers">Careers</a>
-                    <a href="#" id="navBlog">Blog</a>
+                    <a href="#research" class="active" data-section="research">Research</a>
+                    <a href="#products" data-section="products">Products</a>
+                    <a href="#about" data-section="about">About</a>
+                    <a href="#careers" data-section="careers">Careers</a>
+                    <a href="#blog" data-section="blog">Blog</a>
                     <button class="btn-outline" id="contactBtn">
                         <i class="fas fa-arrow-right"></i> Contact
                     </button>
@@ -1026,163 +760,241 @@
             </nav>
         </header>
 
-        <!-- ===== HERO SECTION ===== -->
-        <section class="hero">
+        <!-- ============================================================
+        HERO SECTION
+        ============================================================ -->
+        <section class="hero" id="home">
             <div class="hero-badge" id="heroBadge">
                 <i class="fas fa-microchip"></i> deep-tech · dual focus
             </div>
             <h1>Humanoid <span>+</span> Rehabilitation</h1>
             <p>Engineering the future of movement — from intelligent humanoid platforms to life-changing rehabilitation devices that restore mobility and hope.</p>
-            <div class="hero-actions">
-                <button class="btn-primary" id="heroExplore">
+            <div style="display:flex; gap:1rem; flex-wrap:wrap; justify-content:center;">
+                <button class="btn-outline" style="background:var(--primary);color:white;border-color:var(--primary);" id="heroExplore">
                     <i class="fas fa-rocket"></i> Explore Solutions
                 </button>
-                <button class="btn-primary-outline" id="heroLearn">
+                <button class="btn-outline" id="heroLearn">
                     <i class="fas fa-play-circle"></i> Learn More
                 </button>
             </div>
         </section>
 
-        <!-- ===== PILLARS SECTION ===== -->
-        <div class="pillars">
-
-            <!-- Humanoid Robotics -->
-            <div class="pillar-card" id="roboticsCard">
-                <div class="pillar-icon"><i class="fas fa-robot"></i></div>
-                <h2>Humanoid Robotics</h2>
-                <div class="subtitle">
-                    <i class="fas fa-cogs"></i> advanced locomotion & AI
+        <!-- ============================================================
+        RESEARCH SECTION
+        ============================================================ -->
+        <section class="section-page" id="research">
+            <div class="section-title">
+                <i class="fas fa-microscope"></i> Research
+            </div>
+            <p class="section-subtitle">Pioneering breakthroughs in humanoid robotics and rehabilitation through cutting-edge research and innovation.</p>
+            <div class="section-grid">
+                <div class="section-card">
+                    <div class="card-icon"><i class="fas fa-robot"></i></div>
+                    <h3>Humanoid Locomotion</h3>
+                    <p>Advanced bipedal walking algorithms, dynamic balance control, and real-time adaptation for humanoid robots.</p>
+                    <span class="tag">12+ prototypes</span>
                 </div>
-                <p>Full‑scale humanoid platforms designed for research, automation, and human‑robot interaction. Built with modular actuation, real‑time perception, and adaptive control systems.</p>
-                <div class="product-grid">
-                    <div class="product-item" data-product="NOVA-H1">
-                        <i class="fas fa-walking"></i>
-                        <span>NOVA‑H1</span>
-                        <small>bi-pedal</small>
+                <div class="section-card">
+                    <div class="card-icon"><i class="fas fa-brain"></i></div>
+                    <h3>AI & Machine Learning</h3>
+                    <p>Edge AI models for real-time perception, decision-making, and adaptive control in robotic systems.</p>
+                    <span class="tag">47 publications</span>
+                </div>
+                <div class="section-card">
+                    <div class="card-icon"><i class="fas fa-heartbeat"></i></div>
+                    <h3>Neuro-Rehabilitation</h3>
+                    <p>Brain-computer interfaces, FES systems, and wearable exoskeletons for restoring motor functions.</p>
+                    <span class="tag">8 active trials</span>
+                </div>
+                <div class="section-card">
+                    <div class="card-icon"><i class="fas fa-flask"></i></div>
+                    <h3>Clinical Research</h3>
+                    <p>Collaborative studies with leading hospitals to validate and improve rehabilitation outcomes.</p>
+                    <span class="tag">200+ patients</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============================================================
+        PRODUCTS SECTION
+        ============================================================ -->
+        <section class="section-page" id="products">
+            <div class="section-title">
+                <i class="fas fa-boxes"></i> Products
+            </div>
+            <p class="section-subtitle">Innovative solutions designed for research institutions, healthcare providers, and industrial applications.</p>
+            <div class="products-grid">
+                <div class="product-card" data-product="NOVA-H1">
+                    <div class="product-icon"><i class="fas fa-walking"></i></div>
+                    <h4>NOVA-H1</h4>
+                    <p>Full-scale humanoid robot with advanced bipedal locomotion and modular actuation.</p>
+                    <span class="badge">Bi-pedal</span>
+                </div>
+                <div class="product-card" data-product="Dexterous Hand">
+                    <div class="product-icon"><i class="fas fa-hand-peace"></i></div>
+                    <h4>Dexterous Hand</h4>
+                    <p>Multi-fingered robotic hand with tactile sensing and precise manipulation.</p>
+                    <span class="badge">Tactile</span>
+                </div>
+                <div class="product-card" data-product="Neuro-Control">
+                    <div class="product-icon"><i class="fas fa-brain"></i></div>
+                    <h4>Neuro-Control</h4>
+                    <p>Edge AI controller for real-time robot perception and adaptive behavior.</p>
+                    <span class="badge">Edge AI</span>
+                </div>
+                <div class="product-card" data-product="Exo-Lite">
+                    <div class="product-icon"><i class="fas fa-tshirt"></i></div>
+                    <h4>Exo-Lite</h4>
+                    <p>Lightweight upper-limb exoskeleton for rehabilitation and assistance.</p>
+                    <span class="badge">Upper Limb</span>
+                </div>
+                <div class="product-card" data-product="Gait-Aid">
+                    <div class="product-icon"><i class="fas fa-shoe-prints"></i></div>
+                    <h4>Gait-Aid</h4>
+                    <p>Lower-limb wearable device for gait training and mobility restoration.</p>
+                    <span class="badge">Lower Limb</span>
+                </div>
+                <div class="product-card" data-product="Neuro-Stim">
+                    <div class="product-icon"><i class="fas fa-wave-square"></i></div>
+                    <h4>Neuro-Stim</h4>
+                    <p>Functional electrical stimulation system for neuro-rehabilitation.</p>
+                    <span class="badge">FES</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============================================================
+        ABOUT SECTION
+        ============================================================ -->
+        <section class="section-page" id="about">
+            <div class="section-title">
+                <i class="fas fa-building"></i> About NOVA
+            </div>
+            <p class="section-subtitle">We are a deep-tech company with a dual mission: advancing humanoid robotics and transforming rehabilitation.</p>
+            <div class="section-grid">
+                <div class="section-card">
+                    <div class="card-icon"><i class="fas fa-rocket"></i></div>
+                    <h3>Our Mission</h3>
+                    <p>To engineer intelligent systems that augment human capabilities and restore mobility for those in need.</p>
+                </div>
+                <div class="section-card">
+                    <div class="card-icon"><i class="fas fa-users"></i></div>
+                    <h3>Our Team</h3>
+                    <p>World-class engineers, researchers, and clinicians working together to push the boundaries of technology.</p>
+                </div>
+                <div class="section-card">
+                    <div class="card-icon"><i class="fas fa-globe"></i></div>
+                    <h3>Global Impact</h3>
+                    <p>Deploying solutions in 20+ countries, collaborating with leading institutions worldwide.</p>
+                </div>
+                <div class="section-card">
+                    <div class="card-icon"><i class="fas fa-handshake"></i></div>
+                    <h3>Partnerships</h3>
+                    <p>Collaborating with MIT, Stanford, Mayo Clinic, and other world-class organizations.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============================================================
+        CAREERS SECTION
+        ============================================================ -->
+        <section class="section-page" id="careers">
+            <div class="section-title">
+                <i class="fas fa-briefcase"></i> Careers
+            </div>
+            <p class="section-subtitle">Join us in shaping the future of robotics and rehabilitation. Be part of a team that makes a difference.</p>
+            <div class="career-item" data-role="AI Research Scientist">
+                <div class="career-info">
+                    <h4>AI Research Scientist</h4>
+                    <p>Lead research in machine learning, computer vision, and autonomous systems.</p>
+                </div>
+                <span class="career-badge">Full-time · Remote</span>
+            </div>
+            <div class="career-item" data-role="Robotics Engineer">
+                <div class="career-info">
+                    <h4>Senior Robotics Engineer</h4>
+                    <p>Design and develop humanoid robot systems with advanced actuation and control.</p>
+                </div>
+                <span class="career-badge">Full-time · On-site</span>
+            </div>
+            <div class="career-item" data-role="Clinical Research Manager">
+                <div class="career-info">
+                    <h4>Clinical Research Manager</h4>
+                    <p>Lead clinical trials for rehabilitation devices and ensure regulatory compliance.</p>
+                </div>
+                <span class="career-badge">Full-time · Hybrid</span>
+            </div>
+            <div class="career-item" data-role="Embedded Systems Engineer">
+                <div class="career-info">
+                    <h4>Embedded Systems Engineer</h4>
+                    <p>Develop real-time embedded systems for robotic control and sensor integration.</p>
+                </div>
+                <span class="career-badge">Full-time · On-site</span>
+            </div>
+            <div class="career-item" data-role="Product Designer">
+                <div class="career-info">
+                    <h4>Product Designer (Hardware)</h4>
+                    <p>Design ergonomic and functional rehabilitation devices with a focus on user experience.</p>
+                </div>
+                <span class="career-badge">Full-time · Hybrid</span>
+            </div>
+        </section>
+
+        <!-- ============================================================
+        BLOG SECTION
+        ============================================================ -->
+        <section class="section-page" id="blog">
+            <div class="section-title">
+                <i class="fas fa-blog"></i> Blog
+            </div>
+            <p class="section-subtitle">Insights, stories, and updates from the forefront of robotics and rehabilitation technology.</p>
+            <div class="blog-grid">
+                <div class="blog-card" data-blog="The Future of Humanoid Robotics">
+                    <div class="blog-image" style="background:linear-gradient(135deg,#1f8bff,#6c5ce7);">
+                        <i class="fas fa-robot"></i>
                     </div>
-                    <div class="product-item" data-product="Dexterous Hand">
-                        <i class="fas fa-hand-peace"></i>
-                        <span>Dexterous hand</span>
-                        <small>tactile</small>
+                    <div class="blog-content">
+                        <span class="blog-tag">Robotics</span>
+                        <h4>The Future of Humanoid Robotics</h4>
+                        <p>Exploring the next generation of humanoid robots and their impact on society.</p>
                     </div>
-                    <div class="product-item" data-product="Neuro-control">
+                </div>
+                <div class="blog-card" data-blog="AI in Rehabilitation">
+                    <div class="blog-image" style="background:linear-gradient(135deg,#6c5ce7,#1f8bff);">
                         <i class="fas fa-brain"></i>
-                        <span>Neuro‑control</span>
-                        <small>edge AI</small>
+                    </div>
+                    <div class="blog-content">
+                        <span class="blog-tag">AI & Health</span>
+                        <h4>AI-Powered Rehabilitation</h4>
+                        <p>How artificial intelligence is transforming patient care and recovery outcomes.</p>
                     </div>
                 </div>
-                <div class="pillar-cta">
-                    <button class="btn-primary" id="exploreRobotics">
-                        <i class="fas fa-arrow-right"></i> Explore robotics
-                    </button>
-                    <button class="btn-primary-outline" id="whitepaperBtn">
-                        <i class="fas fa-book-open"></i> Whitepaper
-                    </button>
-                </div>
-            </div>
-
-            <!-- Rehabilitation Devices -->
-            <div class="pillar-card" id="rehabCard">
-                <div class="pillar-icon"><i class="fas fa-heartbeat"></i></div>
-                <h2>Rehabilitation</h2>
-                <div class="subtitle">
-                    <i class="fas fa-hand-holding-heart"></i> assistive & therapeutic
-                </div>
-                <p>Wearable exoskeletons, neuro‑stimulation, and smart rehab devices that restore mobility and improve quality of life for patients and clinicians worldwide.</p>
-                <div class="product-grid">
-                    <div class="product-item" data-product="Exo-Lite">
+                <div class="blog-card" data-blog="Exoskeleton Technology">
+                    <div class="blog-image" style="background:linear-gradient(135deg,#1f8bff,#00b894);">
                         <i class="fas fa-tshirt"></i>
-                        <span>Exo‑Lite</span>
-                        <small>upper limb</small>
                     </div>
-                    <div class="product-item" data-product="Gait-Aid">
-                        <i class="fas fa-shoe-prints"></i>
-                        <span>Gait‑Aid</span>
-                        <small>lower limb</small>
+                    <div class="blog-content">
+                        <span class="blog-tag">Wearables</span>
+                        <h4>Advances in Exoskeleton Technology</h4>
+                        <p>From rehabilitation to augmentation — the evolution of wearable robotics.</p>
                     </div>
-                    <div class="product-item" data-product="Neuro-Stim">
+                </div>
+                <div class="blog-card" data-blog="Neuro-Stim Breakthroughs">
+                    <div class="blog-image" style="background:linear-gradient(135deg,#6c5ce7,#fd79a8);">
                         <i class="fas fa-wave-square"></i>
-                        <span>Neuro‑Stim</span>
-                        <small>FES</small>
                     </div>
-                </div>
-                <div class="pillar-cta">
-                    <button class="btn-primary" id="exploreRehab">
-                        <i class="fas fa-arrow-right"></i> Rehab solutions
-                    </button>
-                    <button class="btn-primary-outline" id="clinicalBtn">
-                        <i class="fas fa-clinic-medical"></i> Clinical trials
-                    </button>
-                </div>
-            </div>
-        </div>
-
-        <!-- ===== DIVIDER ===== -->
-        <div class="divider-section">
-            <div class="tag" id="dividerTag">
-                <i class="fas fa-circle"></i> humanoid · rehabilitation · dual expertise <i class="fas fa-circle"></i>
-            </div>
-        </div>
-
-        <!-- ===== INNOVATION STATS ===== -->
-        <div class="innovation">
-            <div class="innovation-item" data-stat="humanoid prototypes">
-                <div class="number">12+</div>
-                <div class="label">humanoid prototypes</div>
-            </div>
-            <div class="innovation-item" data-stat="rehab devices">
-                <div class="number">8</div>
-                <div class="label">rehab devices (FDA/CE)</div>
-            </div>
-            <div class="innovation-item" data-stat="clinical installations">
-                <div class="number">200+</div>
-                <div class="label">clinical installations</div>
-            </div>
-            <div class="innovation-item" data-stat="research publications">
-                <div class="number">47</div>
-                <div class="label">research publications</div>
-            </div>
-        </div>
-
-        <!-- ===== TESTIMONIALS SECTION ===== -->
-        <section class="testimonials">
-            <h2 class="section-title">What Our Partners Say</h2>
-            <p class="section-subtitle">Trusted by leading research institutions and healthcare providers worldwide.</p>
-            <div class="testimonial-grid">
-                <div class="testimonial-card">
-                    <div class="quote">"NOVA's humanoid platform has revolutionized our research in bipedal locomotion. The modular design and AI capabilities are unmatched."</div>
-                    <div class="author">
-                        <div class="avatar">JD</div>
-                        <div>
-                            <div class="name">Dr. Jane Doe</div>
-                            <div class="role">MIT Robotics Lab</div>
-                        </div>
-                    </div>
-                </div>
-                <div class="testimonial-card">
-                    <div class="quote">"The rehabilitation devices from NOVA have transformed patient outcomes. The Exo-Lite system is a game-changer for stroke recovery."</div>
-                    <div class="author">
-                        <div class="avatar">MS</div>
-                        <div>
-                            <div class="name">Dr. Mark Smith</div>
-                            <div class="role">Mayo Clinic</div>
-                        </div>
-                    </div>
-                </div>
-                <div class="testimonial-card">
-                    <div class="quote">"Neuro-control integration with our existing systems was seamless. The edge AI capabilities open new possibilities for real-time adaptation."</div>
-                    <div class="author">
-                        <div class="avatar">AL</div>
-                        <div>
-                            <div class="name">Prof. Anna Lee</div>
-                            <div class="role">Stanford University</div>
-                        </div>
+                    <div class="blog-content">
+                        <span class="blog-tag">Neuro-Rehab</span>
+                        <h4>Breakthroughs in Neuro-Stimulation</h4>
+                        <p>Recent advances in FES and brain-computer interfaces for stroke recovery.</p>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- ===== FOOTER ===== -->
+        <!-- ============================================================
+        FOOTER
+        ============================================================ -->
         <footer class="footer">
             <div class="footer-links">
                 <span>© 2026 NOVA technologies</span>
@@ -1200,9 +1012,9 @@
         </footer>
     </div>
 
-    <!-- ============================================================ -->
-    <!-- ===== JAVASCRIPT - FULLY FUNCTIONAL ===== -->
-    <!-- ============================================================ -->
+    <!-- ============================================================
+    JAVASCRIPT - FULLY FUNCTIONAL
+    ============================================================ -->
     <script>
         (function() {
             'use strict';
@@ -1235,6 +1047,9 @@
                 } else {
                     backToTop.classList.remove('visible');
                 }
+
+                // Update active nav link based on scroll
+                updateActiveNav();
             });
 
             backToTop.addEventListener('click', function() {
@@ -1243,143 +1058,129 @@
             });
 
             // ============================================================
-            // NAVIGATION LINKS
+            // NAVIGATION - SMOOTH SCROLL TO SECTIONS
             // ============================================================
-            document.getElementById('navResearch').addEventListener('click', function(e) {
-                e.preventDefault();
-                showToast('🔬 Research: 47 publications, 12+ prototypes, 8 active grants', 'fa-microscope');
-            });
+            const navLinks = document.querySelectorAll('.nav-links a[href^="#"]');
+            const sections = document.querySelectorAll('.section-page');
 
-            document.getElementById('navProducts').addEventListener('click', function(e) {
-                e.preventDefault();
-                showToast('📦 Products: Humanoid Robotics & Rehabilitation Devices', 'fa-boxes');
-            });
+            navLinks.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const targetId = this.getAttribute('href');
+                    const targetSection = document.querySelector(targetId);
 
-            document.getElementById('navAbout').addEventListener('click', function(e) {
-                e.preventDefault();
-                showToast('🏢 About NOVA: Founded 2018, dual-focus on robotics & rehab', 'fa-building');
-            });
+                    if (targetSection) {
+                        targetSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
 
-            document.getElementById('navCareers').addEventListener('click', function(e) {
-                e.preventDefault();
-                showToast('💼 Careers: Open positions in AI, Mechatronics, Clinical Research', 'fa-briefcase');
-            });
+                        // Update active state
+                        navLinks.forEach(l => l.classList.remove('active'));
+                        this.classList.add('active');
 
-            document.getElementById('navBlog').addEventListener('click', function(e) {
-                e.preventDefault();
-                showToast('📝 Blog: Latest insights on robotics & rehabilitation', 'fa-blog');
-            });
-
-            document.getElementById('contactBtn').addEventListener('click', function(e) {
-                e.preventDefault();
-                showToast('📬 Contact: hello@novatech.ai | +1 (800) 555‑NOVA', 'fa-envelope');
+                        // Show toast for navigation
+                        const sectionName = this.textContent.trim();
+                        showToast(`📍 Navigating to ${sectionName}`, 'fa-arrow-right');
+                    }
+                });
             });
 
             // ============================================================
-            // LOGO
+            // UPDATE ACTIVE NAV ON SCROLL
+            // ============================================================
+            function updateActiveNav() {
+                let currentSection = '';
+                const scrollPosition = window.scrollY + 100;
+
+                sections.forEach(section => {
+                    const sectionTop = section.offsetTop;
+                    const sectionHeight = section.offsetHeight;
+
+                    if (scrollPosition >= sectionTop && scrollPosition < sectionTop + sectionHeight) {
+                        currentSection = section.id;
+                    }
+                });
+
+                navLinks.forEach(link => {
+                    link.classList.remove('active');
+                    if (link.getAttribute('href') === `#${currentSection}`) {
+                        link.classList.add('active');
+                    }
+                });
+            }
+
+            // ============================================================
+            // LOGO - Scroll to top
             // ============================================================
             document.getElementById('logo').addEventListener('click', function() {
-                showToast('🏠 NOVA Technologies — Humanoid + Rehabilitation', 'fa-robot');
                 window.scrollTo({ top: 0, behavior: 'smooth' });
+                showToast('🏠 NOVA Technologies — Humanoid + Rehabilitation', 'fa-robot');
+                navLinks.forEach(l => l.classList.remove('active'));
             });
 
             // ============================================================
             // HERO BUTTONS
             // ============================================================
             document.getElementById('heroExplore').addEventListener('click', function() {
-                showToast('🚀 Explore NOVA solutions: Robotics & Rehabilitation', 'fa-rocket');
-                document.querySelector('.pillars').scrollIntoView({ behavior: 'smooth', block: 'start' });
+                document.getElementById('products').scrollIntoView({ behavior: 'smooth', block: 'start' });
+                showToast('🚀 Exploring NOVA Solutions', 'fa-rocket');
             });
 
             document.getElementById('heroLearn').addEventListener('click', function() {
-                showToast('📖 Learn more about our dual-focus technology', 'fa-play-circle');
+                document.getElementById('about').scrollIntoView({ behavior: 'smooth', block: 'start' });
+                showToast('📖 Learning about NOVA', 'fa-play-circle');
             });
 
-            // ============================================================
-            // HERO BADGE
-            // ============================================================
             document.getElementById('heroBadge').addEventListener('click', function() {
-                showToast('⚡ Dual-focus: Humanoid Robotics & Rehabilitation Devices', 'fa-microchip');
+                showToast('⚡ Dual-focus: Humanoid Robotics & Rehabilitation', 'fa-microchip');
             });
 
             // ============================================================
-            // EXPLORE ROBOTICS
+            // CONTACT BUTTON
             // ============================================================
-            document.getElementById('exploreRobotics').addEventListener('click', function() {
-                showToast('🤖 Exploring Humanoid Robotics: NOVA-H1, Dexterous Hand, Neuro-control', 'fa-robot');
+            document.getElementById('contactBtn').addEventListener('click', function() {
+                showToast('📬 Contact: hello@novatech.ai | +1 (800) 555‑NOVA', 'fa-envelope');
             });
 
             // ============================================================
-            // WHITEPAPER
+            // PRODUCT CARDS
             // ============================================================
-            document.getElementById('whitepaperBtn').addEventListener('click', function() {
-                showToast('📄 Downloading Whitepaper: "Humanoid Locomotion & AI Systems"', 'fa-book-open');
-            });
-
-            // ============================================================
-            // EXPLORE REHAB
-            // ============================================================
-            document.getElementById('exploreRehab').addEventListener('click', function() {
-                showToast('🩺 Exploring Rehabilitation: Exo-Lite, Gait-Aid, Neuro-Stim', 'fa-heartbeat');
-            });
-
-            // ============================================================
-            // CLINICAL TRIALS
-            // ============================================================
-            document.getElementById('clinicalBtn').addEventListener('click', function() {
-                showToast('🧪 Clinical Trials: 8 active studies, 200+ patients enrolled', 'fa-clinic-medical');
-            });
-
-            // ============================================================
-            // DIVIDER TAG
-            // ============================================================
-            document.getElementById('dividerTag').addEventListener('click', function() {
-                showToast('⚖️ Equal focus: Robotics · Rehabilitation', 'fa-balance-scale');
-            });
-
-            // ============================================================
-            // PRODUCT ITEMS
-            // ============================================================
-            document.querySelectorAll('.product-item').forEach(function(item) {
-                item.addEventListener('click', function() {
-                    const product = this.dataset.product || 'Product';
-                    const tag = this.querySelector('small')?.textContent || '';
-                    showToast(`🔍 ${product} — ${tag} (click for details)`, 'fa-info-circle');
-                });
-            });
-
-            // ============================================================
-            // INNOVATION STATS
-            // ============================================================
-            document.querySelectorAll('.innovation-item').forEach(function(item) {
-                item.addEventListener('click', function() {
-                    const stat = this.dataset.stat || 'Statistic';
-                    const number = this.querySelector('.number')?.textContent || '';
-                    showToast(`📊 ${number} ${stat}`, 'fa-chart-line');
-                });
-            });
-
-            // ============================================================
-            // TESTIMONIAL CARDS
-            // ============================================================
-            document.querySelectorAll('.testimonial-card').forEach(function(card) {
+            document.querySelectorAll('.product-card').forEach(card => {
                 card.addEventListener('click', function() {
-                    const author = this.querySelector('.name')?.textContent || 'Partner';
-                    showToast(`💬 ${author} — View full testimonial`, 'fa-quote-right');
+                    const product = this.dataset.product || 'Product';
+                    const badge = this.querySelector('.badge')?.textContent || '';
+                    showToast(`🔍 ${product} — ${badge} (click for details)`, 'fa-info-circle');
                 });
             });
 
             // ============================================================
-            // PILLAR CARDS (click on card background)
+            // CAREER ITEMS
             // ============================================================
-            document.getElementById('roboticsCard').addEventListener('click', function(e) {
-                if (e.target.closest('button') || e.target.closest('.product-item')) return;
-                showToast('🤖 Humanoid Robotics: Advanced actuation, AI perception, modular design', 'fa-robot');
+            document.querySelectorAll('.career-item').forEach(item => {
+                item.addEventListener('click', function() {
+                    const role = this.dataset.role || 'Position';
+                    const badge = this.querySelector('.career-badge')?.textContent || '';
+                    showToast(`💼 ${role} — ${badge}`, 'fa-briefcase');
+                });
             });
 
-            document.getElementById('rehabCard').addEventListener('click', function(e) {
-                if (e.target.closest('button') || e.target.closest('.product-item')) return;
-                showToast('❤️ Rehabilitation: Restoring mobility, improving quality of life', 'fa-heartbeat');
+            // ============================================================
+            // BLOG CARDS
+            // ============================================================
+            document.querySelectorAll('.blog-card').forEach(card => {
+                card.addEventListener('click', function() {
+                    const blog = this.dataset.blog || 'Blog post';
+                    const tag = this.querySelector('.blog-tag')?.textContent || '';
+                    showToast(`📝 ${blog} — ${tag}`, 'fa-blog');
+                });
+            });
+
+            // ============================================================
+            // SECTION CARDS (Research, About)
+            // ============================================================
+            document.querySelectorAll('.section-card').forEach(card => {
+                card.addEventListener('click', function() {
+                    const title = this.querySelector('h3')?.textContent || 'Card';
+                    showToast(`📋 ${title} — Click for more details`, 'fa-file-alt');
+                });
             });
 
             // ============================================================
@@ -1429,23 +1230,10 @@
             });
 
             // ============================================================
-            // KEYBOARD ACCESSIBILITY (Enter/Space on clickable elements)
+            // LOG
             // ============================================================
-            document.querySelectorAll('[role="button"], .btn-primary, .btn-primary-outline, .btn-accent, .btn-outline, .product-item, .innovation-item, .testimonial-card')
-                .forEach(function(el) {
-                    el.addEventListener('keydown', function(e) {
-                        if (e.key === 'Enter' || e.key === ' ') {
-                            e.preventDefault();
-                            this.click();
-                        }
-                    });
-                });
-
-            // ============================================================
-            // CONSOLE LOG
-            // ============================================================
-            console.log('🚀 NOVA Landing Page fully functional!');
-            console.log('📊 All interactive elements are working.');
+            console.log('🚀 NOVA Landing Page fully functional with navigation!');
+            console.log('📊 All sections: Research, Products, About, Careers, Blog');
 
         })();
     </script>
