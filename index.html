@@ -1,548 +1,1454 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>NOVA · robotics & rehabilitation</title>
-  <!-- Font & Icons -->
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
-  <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>NOVA · Robotics & Rehabilitation</title>
+    <!-- Font & Icons -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700;14..32,800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+    <style>
+        /* ===== RESET & BASE ===== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-    body {
-      font-family: 'Inter', sans-serif;
-      background: #f8fafc;
-      color: #0b1a2f;
-      line-height: 1.5;
-    }
+        :root {
+            --primary: #0b1a2f;
+            --secondary: #1f3a5f;
+            --accent: #1f8bff;
+            --accent2: #6c5ce7;
+            --light-bg: #f8fafc;
+            --card-bg: #ffffff;
+            --text-primary: #0b1a2f;
+            --text-secondary: #334e6e;
+            --text-light: #4e6a8a;
+            --border-color: #eef2f6;
+            --shadow: 0 20px 40px -12px rgba(0, 20, 40, 0.12);
+            --shadow-hover: 0 30px 50px -16px rgba(0, 20, 40, 0.18);
+            --radius: 2.5rem;
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
 
-    .container {
-      max-width: 1280px;
-      margin: 0 auto;
-      padding: 0 2rem;
-    }
+        html {
+            scroll-behavior: smooth;
+        }
 
-    /* header / nav */
-    .navbar {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 1.5rem 0;
-      flex-wrap: wrap;
-    }
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--light-bg);
+            color: var(--text-primary);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
 
-    .logo {
-      font-weight: 700;
-      font-size: 1.8rem;
-      letter-spacing: -0.02em;
-      background: linear-gradient(145deg, #0b1a2f, #1f3a5f);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-    }
+        /* ===== SCROLLBAR ===== */
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+        ::-webkit-scrollbar-track {
+            background: var(--light-bg);
+        }
+        ::-webkit-scrollbar-thumb {
+            background: var(--secondary);
+            border-radius: 10px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--accent);
+        }
 
-    .logo i {
-      -webkit-text-fill-color: #1f8bff;
-      margin-right: 6px;
-    }
+        /* ===== CONTAINER ===== */
+        .container {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
 
-    .nav-links {
-      display: flex;
-      gap: 2.5rem;
-      font-weight: 500;
-      color: #1f3a5f;
-    }
+        /* ===== ANIMATIONS ===== */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
 
-    .nav-links a {
-      text-decoration: none;
-      color: inherit;
-      transition: color 0.2s;
-    }
+        @keyframes float {
+            0%,
+            100% {
+                transform: translateY(0px);
+            }
+            50% {
+                transform: translateY(-10px);
+            }
+        }
 
-    .nav-links a:hover {
-      color: #1f8bff;
-    }
+        @keyframes pulse {
+            0%,
+            100% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.05);
+            }
+        }
 
-    .btn-outline {
-      border: 1.5px solid #1f3a5f;
-      padding: 0.5rem 1.25rem;
-      border-radius: 40px;
-      font-weight: 600;
-      background: transparent;
-      transition: 0.2s;
-      cursor: default;
-    }
+        @keyframes slideInLeft {
+            from {
+                opacity: 0;
+                transform: translateX(-50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
 
-    .btn-outline:hover {
-      background: #1f3a5f10;
-    }
+        @keyframes slideInRight {
+            from {
+                opacity: 0;
+                transform: translateX(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
 
-    /* hero */
-    .hero {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      text-align: center;
-      padding: 3rem 0 4rem;
-    }
+        .animate-fadeInUp {
+            animation: fadeInUp 0.8s ease forwards;
+        }
 
-    .hero h1 {
-      font-size: 3.2rem;
-      font-weight: 600;
-      letter-spacing: -0.03em;
-      max-width: 800px;
-      margin-bottom: 1rem;
-    }
+        .animate-slideLeft {
+            animation: slideInLeft 0.8s ease forwards;
+        }
 
-    .hero h1 span {
-      background: linear-gradient(135deg, #1f8bff, #6c5ce7);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-    }
+        .animate-slideRight {
+            animation: slideInRight 0.8s ease forwards;
+        }
 
-    .hero p {
-      font-size: 1.25rem;
-      color: #334e6e;
-      max-width: 640px;
-      margin-bottom: 2rem;
-    }
+        .animate-float {
+            animation: float 3s ease-in-out infinite;
+        }
 
-    .hero-badge {
-      background: #e8f0fe;
-      padding: 0.5rem 1.5rem;
-      border-radius: 60px;
-      font-weight: 500;
-      color: #1f3a5f;
-      font-size: 0.9rem;
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-    }
+        /* ===== HEADER / NAVBAR ===== */
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.5rem 0;
+            flex-wrap: wrap;
+            position: relative;
+            z-index: 100;
+        }
 
-    /* two pillars: equal split */
-    .pillars {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 2.5rem;
-      padding: 2.5rem 0 4rem;
-    }
+        .logo {
+            font-weight: 800;
+            font-size: 2rem;
+            letter-spacing: -0.02em;
+            background: linear-gradient(145deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            cursor: pointer;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
 
-    .pillar-card {
-      background: white;
-      border-radius: 2.5rem;
-      padding: 2.5rem 2rem 2.8rem;
-      box-shadow: 0 20px 40px -12px rgba(0, 20, 40, 0.12);
-      transition: transform 0.2s ease, box-shadow 0.25s;
-      display: flex;
-      flex-direction: column;
-      border: 1px solid #eef2f6;
-    }
+        .logo i {
+            -webkit-text-fill-color: var(--accent);
+            font-size: 2.2rem;
+        }
 
-    .pillar-card:hover {
-      transform: translateY(-6px);
-      box-shadow: 0 30px 50px -16px rgba(0, 20, 40, 0.18);
-    }
+        .logo:hover {
+            transform: scale(1.05);
+        }
 
-    .pillar-icon {
-      font-size: 2.8rem;
-      margin-bottom: 1.2rem;
-      color: #1f3a5f;
-    }
+        .nav-links {
+            display: flex;
+            gap: 2.5rem;
+            font-weight: 500;
+            color: var(--secondary);
+            align-items: center;
+            flex-wrap: wrap;
+        }
 
-    .pillar-card h2 {
-      font-size: 2rem;
-      font-weight: 600;
-      letter-spacing: -0.02em;
-      margin-bottom: 0.5rem;
-    }
+        .nav-links a {
+            text-decoration: none;
+            color: inherit;
+            transition: var(--transition);
+            cursor: pointer;
+            position: relative;
+            padding: 0.5rem 0;
+        }
 
-    .pillar-card .subtitle {
-      font-weight: 500;
-      color: #1f8bff;
-      text-transform: uppercase;
-      letter-spacing: 0.03em;
-      font-size: 0.85rem;
-      margin-bottom: 1rem;
-    }
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--accent);
+            transition: var(--transition);
+        }
 
-    .pillar-card p {
-      color: #2c405a;
-      margin-bottom: 1.8rem;
-      flex: 1;
-    }
+        .nav-links a:hover::after {
+            width: 100%;
+        }
 
-    .product-grid {
-      display: flex;
-      flex-direction: column;
-      gap: 1.2rem;
-      margin-top: 0.5rem;
-    }
+        .nav-links a:hover {
+            color: var(--accent);
+        }
 
-    .product-item {
-      display: flex;
-      align-items: center;
-      gap: 1rem;
-      background: #f2f6fc;
-      padding: 0.8rem 1.2rem;
-      border-radius: 60px;
-      transition: background 0.15s;
-    }
+        .btn-outline {
+            border: 1.5px solid var(--secondary);
+            padding: 0.6rem 1.5rem;
+            border-radius: 40px;
+            font-weight: 600;
+            background: transparent;
+            transition: var(--transition);
+            cursor: pointer;
+            background: white;
+            color: var(--secondary);
+        }
 
-    .product-item i {
-      font-size: 1.5rem;
-      width: 2.2rem;
-      color: #1f3a5f;
-    }
+        .btn-outline:hover {
+            background: var(--secondary);
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(31, 58, 95, 0.2);
+        }
 
-    .product-item span {
-      font-weight: 500;
-    }
+        /* ===== HERO SECTION ===== */
+        .hero {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            padding: 4rem 0 5rem;
+            position: relative;
+        }
 
-    .product-item small {
-      color: #4e6a8a;
-      font-weight: 400;
-      margin-left: auto;
-      background: white;
-      padding: 0.2rem 1rem;
-      border-radius: 60px;
-      font-size: 0.75rem;
-    }
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -20%;
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(31, 139, 255, 0.05) 0%, transparent 70%);
+            border-radius: 50%;
+            z-index: 0;
+        }
 
-    .pillar-cta {
-      margin-top: 2rem;
-      display: flex;
-      gap: 1rem;
-      flex-wrap: wrap;
-    }
+        .hero>* {
+            position: relative;
+            z-index: 1;
+        }
 
-    .btn-primary {
-      background: #0b1a2f;
-      color: white;
-      border: none;
-      padding: 0.8rem 2rem;
-      border-radius: 60px;
-      font-weight: 600;
-      font-size: 1rem;
-      cursor: default;
-      transition: 0.2s;
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-    }
+        .hero-badge {
+            background: #e8f0fe;
+            padding: 0.6rem 1.8rem;
+            border-radius: 60px;
+            font-weight: 500;
+            color: var(--secondary);
+            font-size: 0.9rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            cursor: pointer;
+            transition: var(--transition);
+            margin-bottom: 1.5rem;
+        }
 
-    .btn-primary i {
-      font-size: 0.9rem;
-    }
+        .hero-badge:hover {
+            background: var(--accent);
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(31, 139, 255, 0.3);
+        }
 
-    .btn-primary-outline {
-      background: transparent;
-      border: 1.5px solid #0b1a2f;
-      color: #0b1a2f;
-      padding: 0.8rem 2rem;
-      border-radius: 60px;
-      font-weight: 600;
-      cursor: default;
-      transition: 0.2s;
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-    }
+        .hero-badge:hover i {
+            color: white !important;
+        }
 
-    .btn-primary-outline i {
-      font-size: 0.9rem;
-    }
+        .hero-badge i {
+            color: var(--accent);
+            transition: var(--transition);
+        }
 
-    .btn-primary-outline:hover {
-      background: #0b1a2f05;
-    }
+        .hero h1 {
+            font-size: 4rem;
+            font-weight: 700;
+            letter-spacing: -0.03em;
+            max-width: 800px;
+            margin-bottom: 1.2rem;
+            line-height: 1.1;
+        }
 
-    /* divider / tag line */
-    .divider-section {
-      text-align: center;
-      padding: 0.5rem 0 1.5rem;
-      border-top: 1px solid #e2e8f0;
-      margin-top: 1rem;
-    }
+        .hero h1 span {
+            background: linear-gradient(135deg, var(--accent), var(--accent2));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
 
-    .divider-section .tag {
-      display: inline-block;
-      background: #eef2f6;
-      padding: 0.5rem 2rem;
-      border-radius: 60px;
-      font-weight: 500;
-      color: #1f3a5f;
-      font-size: 0.95rem;
-      letter-spacing: 0.02em;
-    }
+        .hero p {
+            font-size: 1.3rem;
+            color: var(--text-secondary);
+            max-width: 640px;
+            margin-bottom: 2.5rem;
+            line-height: 1.7;
+        }
 
-    .divider-section .tag i {
-      margin-right: 8px;
-      color: #1f8bff;
-    }
+        .hero-actions {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
 
-    /* innovation highlight */
-    .innovation {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 3rem;
-      padding: 3rem 0 2.5rem;
-      background: white;
-      border-radius: 3rem;
-      margin: 2rem 0 1rem;
-      box-shadow: 0 4px 20px rgba(0,0,0,0.02);
-    }
+        /* ===== BUTTONS ===== */
+        .btn-primary {
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 0.9rem 2.5rem;
+            border-radius: 60px;
+            font-weight: 600;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: var(--transition);
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            text-decoration: none;
+            box-shadow: 0 4px 15px rgba(11, 26, 47, 0.2);
+        }
 
-    .innovation-item {
-      text-align: center;
-      flex: 1 1 140px;
-    }
+        .btn-primary i {
+            font-size: 0.9rem;
+            transition: var(--transition);
+        }
 
-    .innovation-item .number {
-      font-size: 2.5rem;
-      font-weight: 700;
-      color: #0b1a2f;
-    }
+        .btn-primary:hover {
+            background: var(--secondary);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 30px rgba(11, 26, 47, 0.3);
+        }
 
-    .innovation-item .label {
-      color: #4e6a8a;
-      font-weight: 500;
-    }
+        .btn-primary:hover i {
+            transform: translateX(4px);
+        }
 
-    /* footer */
-    .footer {
-      padding: 3rem 0 2rem;
-      border-top: 1px solid #e2e8f0;
-      display: flex;
-      justify-content: space-between;
-      flex-wrap: wrap;
-      gap: 1rem;
-      color: #334e6e;
-    }
+        .btn-primary-outline {
+            background: transparent;
+            border: 2px solid var(--primary);
+            color: var(--primary);
+            padding: 0.9rem 2.5rem;
+            border-radius: 60px;
+            font-weight: 600;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: var(--transition);
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            text-decoration: none;
+        }
 
-    .footer a {
-      color: #1f3a5f;
-      text-decoration: none;
-      font-weight: 500;
-      margin-left: 1.5rem;
-    }
+        .btn-primary-outline i {
+            font-size: 0.9rem;
+            transition: var(--transition);
+        }
 
-    .footer a:hover {
-      color: #1f8bff;
-    }
+        .btn-primary-outline:hover {
+            background: var(--primary);
+            color: white;
+            transform: translateY(-3px);
+            box-shadow: 0 8px 30px rgba(11, 26, 47, 0.15);
+        }
 
-    /* responsive */
-    @media (max-width: 900px) {
-      .pillars {
-        grid-template-columns: 1fr;
-        gap: 2rem;
-      }
+        .btn-primary-outline:hover i {
+            transform: translateX(4px);
+        }
 
-      .hero h1 {
-        font-size: 2.5rem;
-      }
+        .btn-accent {
+            background: var(--accent);
+            color: white;
+            border: none;
+            padding: 0.9rem 2.5rem;
+            border-radius: 60px;
+            font-weight: 600;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: var(--transition);
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            text-decoration: none;
+            box-shadow: 0 4px 15px rgba(31, 139, 255, 0.3);
+        }
 
-      .navbar {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 0.8rem;
-      }
+        .btn-accent:hover {
+            background: #1976d9;
+            transform: translateY(-3px);
+            box-shadow: 0 8px 30px rgba(31, 139, 255, 0.4);
+        }
 
-      .nav-links {
-        gap: 1.5rem;
-        flex-wrap: wrap;
-      }
-    }
+        /* ===== PILLARS SECTION ===== */
+        .pillars {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2.5rem;
+            padding: 3rem 0 5rem;
+        }
 
-    @media (max-width: 500px) {
-      .container {
-        padding: 0 1.2rem;
-      }
+        .pillar-card {
+            background: var(--card-bg);
+            border-radius: var(--radius);
+            padding: 2.8rem 2.5rem 3rem;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            display: flex;
+            flex-direction: column;
+            border: 1px solid var(--border-color);
+            position: relative;
+            overflow: hidden;
+        }
 
-      .hero h1 {
-        font-size: 2rem;
-      }
+        .pillar-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--accent), var(--accent2));
+            opacity: 0;
+            transition: var(--transition);
+        }
 
-      .pillar-card {
-        padding: 1.8rem 1.2rem;
-      }
+        .pillar-card:hover::before {
+            opacity: 1;
+        }
 
-      .product-item {
-        flex-wrap: wrap;
-        padding: 0.7rem 1rem;
-        border-radius: 30px;
-      }
+        .pillar-card:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--shadow-hover);
+        }
 
-      .product-item small {
-        margin-left: 0;
-        width: 100%;
-        text-align: right;
-      }
+        .pillar-icon {
+            font-size: 3.2rem;
+            margin-bottom: 1.2rem;
+            color: var(--secondary);
+            transition: var(--transition);
+        }
 
-      .btn-primary, .btn-primary-outline {
-        width: 100%;
-        justify-content: center;
-      }
+        .pillar-card:hover .pillar-icon {
+            transform: scale(1.1) rotate(-5deg);
+        }
 
-      .innovation {
-        gap: 1.5rem;
-      }
-    }
+        .pillar-card h2 {
+            font-size: 2.2rem;
+            font-weight: 700;
+            letter-spacing: -0.02em;
+            margin-bottom: 0.5rem;
+        }
 
-    /* small touches */
-    .pillar-card:nth-child(1) .pillar-icon {
-      color: #1f8bff;
-    }
-    .pillar-card:nth-child(2) .pillar-icon {
-      color: #6c5ce7;
-    }
+        .pillar-card .subtitle {
+            font-weight: 500;
+            color: var(--accent);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            font-size: 0.8rem;
+            margin-bottom: 1.2rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
 
-    .pillar-card .product-item i {
-      color: #1f3a5f;
-    }
+        .pillar-card p {
+            color: var(--text-secondary);
+            margin-bottom: 2rem;
+            flex: 1;
+            line-height: 1.7;
+        }
 
-    .pillar-card:nth-child(2) .product-item i {
-      color: #6c5ce7;
-    }
+        .product-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            margin-top: 0.5rem;
+        }
 
-    .badge-soft {
-      background: #e8f0fe;
-      padding: 0.25rem 0.8rem;
-      border-radius: 60px;
-      font-size: 0.7rem;
-      font-weight: 600;
-      color: #1f8bff;
-      letter-spacing: 0.02em;
-    }
-  </style>
+        .product-item {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            background: #f2f6fc;
+            padding: 0.9rem 1.4rem;
+            border-radius: 60px;
+            transition: var(--transition);
+            cursor: pointer;
+            border: 1px solid transparent;
+        }
+
+        .product-item:hover {
+            background: #e3ebf7;
+            border-color: var(--accent);
+            transform: translateX(6px);
+        }
+
+        .product-item i {
+            font-size: 1.5rem;
+            width: 2.4rem;
+            color: var(--secondary);
+            transition: var(--transition);
+        }
+
+        .product-item:hover i {
+            color: var(--accent);
+            transform: scale(1.1);
+        }
+
+        .product-item span {
+            font-weight: 500;
+            flex: 1;
+        }
+
+        .product-item small {
+            color: var(--text-light);
+            font-weight: 400;
+            background: white;
+            padding: 0.25rem 1.2rem;
+            border-radius: 60px;
+            font-size: 0.75rem;
+            transition: var(--transition);
+        }
+
+        .product-item:hover small {
+            background: var(--accent);
+            color: white;
+        }
+
+        .pillar-cta {
+            margin-top: 2rem;
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        /* ===== DIVIDER ===== */
+        .divider-section {
+            text-align: center;
+            padding: 1rem 0 2rem;
+            border-top: 1px solid var(--border-color);
+            margin-top: 1rem;
+        }
+
+        .divider-section .tag {
+            display: inline-block;
+            background: #eef2f6;
+            padding: 0.6rem 2.5rem;
+            border-radius: 60px;
+            font-weight: 500;
+            color: var(--secondary);
+            font-size: 0.95rem;
+            letter-spacing: 0.02em;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .divider-section .tag:hover {
+            background: var(--primary);
+            color: white;
+            transform: scale(1.05);
+        }
+
+        .divider-section .tag i {
+            margin: 0 8px;
+            color: var(--accent);
+            transition: var(--transition);
+        }
+
+        .divider-section .tag:hover i {
+            color: white;
+        }
+
+        /* ===== INNOVATION STATS ===== */
+        .innovation {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 3rem;
+            padding: 3.5rem 2rem;
+            background: white;
+            border-radius: 3rem;
+            margin: 2rem 0 2rem;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.03);
+            border: 1px solid var(--border-color);
+        }
+
+        .innovation-item {
+            text-align: center;
+            flex: 1 1 150px;
+            cursor: pointer;
+            transition: var(--transition);
+            padding: 1rem;
+            border-radius: 1.5rem;
+        }
+
+        .innovation-item:hover {
+            background: var(--light-bg);
+            transform: translateY(-5px);
+        }
+
+        .innovation-item .number {
+            font-size: 2.8rem;
+            font-weight: 800;
+            color: var(--primary);
+            transition: var(--transition);
+        }
+
+        .innovation-item:hover .number {
+            color: var(--accent);
+        }
+
+        .innovation-item .label {
+            color: var(--text-light);
+            font-weight: 500;
+            margin-top: 0.3rem;
+        }
+
+        /* ===== TESTIMONIALS ===== */
+        .testimonials {
+            padding: 3rem 0 4rem;
+        }
+
+        .testimonials h2 {
+            text-align: center;
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 3rem;
+        }
+
+        .testimonial-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .testimonial-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 1.5rem;
+            box-shadow: var(--shadow);
+            border: 1px solid var(--border-color);
+            transition: var(--transition);
+        }
+
+        .testimonial-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-hover);
+        }
+
+        .testimonial-card .quote {
+            font-size: 1.1rem;
+            color: var(--text-secondary);
+            line-height: 1.7;
+            margin-bottom: 1.5rem;
+            font-style: italic;
+        }
+
+        .testimonial-card .author {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .testimonial-card .author .avatar {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: var(--accent);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 700;
+            font-size: 1.2rem;
+        }
+
+        .testimonial-card .author .name {
+            font-weight: 600;
+        }
+
+        .testimonial-card .author .role {
+            color: var(--text-light);
+            font-size: 0.9rem;
+        }
+
+        /* ===== FOOTER ===== */
+        .footer {
+            padding: 3.5rem 0 2.5rem;
+            border-top: 1px solid var(--border-color);
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 2rem;
+            color: var(--text-secondary);
+        }
+
+        .footer .footer-links {
+            display: flex;
+            gap: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .footer a {
+            color: var(--secondary);
+            text-decoration: none;
+            font-weight: 500;
+            transition: var(--transition);
+            cursor: pointer;
+        }
+
+        .footer a:hover {
+            color: var(--accent);
+        }
+
+        .footer .social-links {
+            display: flex;
+            gap: 1.5rem;
+        }
+
+        .footer .social-links a {
+            font-size: 1.3rem;
+            transition: var(--transition);
+        }
+
+        .footer .social-links a:hover {
+            transform: translateY(-3px);
+            color: var(--accent);
+        }
+
+        /* ===== TOAST NOTIFICATION ===== */
+        .toast {
+            position: fixed;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%) translateY(100px);
+            background: var(--primary);
+            color: white;
+            padding: 16px 32px;
+            border-radius: 60px;
+            font-weight: 500;
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.25);
+            z-index: 999;
+            opacity: 0;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            pointer-events: none;
+            font-size: 0.95rem;
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            max-width: 90%;
+        }
+
+        .toast.show {
+            opacity: 1;
+            transform: translateX(-50%) translateY(0);
+            pointer-events: auto;
+        }
+
+        .toast i {
+            color: var(--accent);
+            font-size: 1.2rem;
+        }
+
+        /* ===== BACK TO TOP ===== */
+        .back-to-top {
+            position: fixed;
+            bottom: 100px;
+            right: 30px;
+            background: var(--primary);
+            color: white;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: var(--transition);
+            opacity: 0;
+            visibility: hidden;
+            box-shadow: 0 4px 20px rgba(11, 26, 47, 0.3);
+            border: none;
+            z-index: 50;
+        }
+
+        .back-to-top.visible {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .back-to-top:hover {
+            background: var(--accent);
+            transform: translateY(-5px);
+        }
+
+        /* ===== RESPONSIVE ===== */
+        @media (max-width: 1024px) {
+            .hero h1 {
+                font-size: 3.2rem;
+            }
+        }
+
+        @media (max-width: 900px) {
+            .pillars {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .hero h1 {
+                font-size: 2.8rem;
+            }
+
+            .navbar {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 1rem;
+            }
+
+            .nav-links {
+                gap: 1.5rem;
+                width: 100%;
+                justify-content: flex-start;
+            }
+
+            .innovation {
+                gap: 2rem;
+                padding: 2.5rem 1.5rem;
+            }
+        }
+
+        @media (max-width: 600px) {
+            .container {
+                padding: 0 1.2rem;
+            }
+
+            .hero h1 {
+                font-size: 2.2rem;
+            }
+
+            .hero p {
+                font-size: 1.1rem;
+            }
+
+            .pillar-card {
+                padding: 1.8rem 1.2rem;
+            }
+
+            .pillar-card h2 {
+                font-size: 1.8rem;
+            }
+
+            .product-item {
+                flex-wrap: wrap;
+                padding: 0.8rem 1rem;
+                border-radius: 30px;
+            }
+
+            .product-item small {
+                margin-left: 0;
+                width: 100%;
+                text-align: right;
+                padding: 0.2rem 0.8rem;
+            }
+
+            .btn-primary,
+            .btn-primary-outline,
+            .btn-accent {
+                width: 100%;
+                justify-content: center;
+            }
+
+            .pillar-cta {
+                flex-direction: column;
+            }
+
+            .innovation {
+                gap: 1.2rem;
+                padding: 2rem 1rem;
+                border-radius: 2rem;
+            }
+
+            .innovation-item .number {
+                font-size: 2rem;
+            }
+
+            .footer {
+                flex-direction: column;
+                align-items: center;
+                text-align: center;
+            }
+
+            .testimonial-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .toast {
+                padding: 14px 20px;
+                font-size: 0.85rem;
+                bottom: 20px;
+            }
+
+            .back-to-top {
+                width: 40px;
+                height: 40px;
+                bottom: 80px;
+                right: 20px;
+            }
+        }
+
+        @media (max-width: 400px) {
+            .hero h1 {
+                font-size: 1.8rem;
+            }
+
+            .nav-links {
+                gap: 1rem;
+                font-size: 0.9rem;
+            }
+
+            .btn-outline {
+                padding: 0.4rem 1rem;
+                font-size: 0.85rem;
+            }
+        }
+
+        /* ===== UTILITY ===== */
+        .text-center {
+            text-align: center;
+        }
+        .mt-2 {
+            margin-top: 2rem;
+        }
+        .mb-2 {
+            margin-bottom: 2rem;
+        }
+
+        /* ===== PILLAR CARD VARIATIONS ===== */
+        .pillar-card:nth-child(1) .pillar-icon {
+            color: var(--accent);
+        }
+        .pillar-card:nth-child(2) .pillar-icon {
+            color: var(--accent2);
+        }
+
+        .pillar-card:nth-child(1) .product-item i {
+            color: var(--accent);
+        }
+        .pillar-card:nth-child(2) .product-item i {
+            color: var(--accent2);
+        }
+
+        .pillar-card:nth-child(1) .subtitle {
+            color: var(--accent);
+        }
+        .pillar-card:nth-child(2) .subtitle {
+            color: var(--accent2);
+        }
+
+        /* ===== SECTION TITLE ===== */
+        .section-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 1rem;
+        }
+
+        .section-subtitle {
+            text-align: center;
+            color: var(--text-secondary);
+            font-size: 1.1rem;
+            max-width: 600px;
+            margin: 0 auto 3rem;
+        }
+    </style>
 </head>
 <body>
-  <div class="container">
-    <!-- header -->
-    <header>
-      <div class="navbar">
-        <div class="logo"><i class="fas fa-robot"></i>NOVA</div>
-        <div class="nav-links">
-          <a href="#">Research</a>
-          <a href="#">Products</a>
-          <a href="#">About</a>
-          <a href="#">Careers</a>
-          <span class="btn-outline"><i class="fas fa-arrow-right"></i> Contact</span>
-        </div>
-      </div>
-    </header>
 
-    <!-- hero -->
-    <section class="hero">
-      <div class="hero-badge"><i class="fas fa-microchip"></i> deep-tech · dual focus</div>
-      <h1>Humanoid <span>+</span> Rehabilitation</h1>
-      <p>Engineering the future of movement — from intelligent humanoid platforms to life-changing rehabilitation devices.</p>
-    </section>
-
-    <!-- two pillars: robotics & rehab -->
-    <div class="pillars">
-      <!-- Humanoid Robotics -->
-      <div class="pillar-card">
-        <div class="pillar-icon"><i class="fas fa-robot"></i></div>
-        <h2>Humanoid Robotics</h2>
-        <div class="subtitle"><i class="fas fa-cogs"></i>  advanced locomotion & AI</div>
-        <p>Full‑scale humanoid platforms designed for research, automation, and human‑robot interaction. Built with modular actuation and real‑time perception.</p>
-        <div class="product-grid">
-          <div class="product-item">
-            <i class="fas fa-walking"></i>
-            <span>NOVA‑H1</span>
-            <small>bi-pedal</small>
-          </div>
-          <div class="product-item">
-            <i class="fas fa-hand-peace"></i>
-            <span>Dexterous hand</span>
-            <small>tactile</small>
-          </div>
-          <div class="product-item">
-            <i class="fas fa-brain"></i>
-            <span>Neuro‑control</span>
-            <small>edge AI</small>
-          </div>
-        </div>
-        <div class="pillar-cta">
-          <span class="btn-primary"><i class="fas fa-arrow-right"></i> Explore robotics</span>
-          <span class="btn-primary-outline"><i class="fas fa-book-open"></i> Whitepaper</span>
-        </div>
-      </div>
-
-      <!-- Rehabilitation Devices -->
-      <div class="pillar-card">
-        <div class="pillar-icon"><i class="fas fa-heartbeat"></i></div>
-        <h2>Rehabilitation</h2>
-        <div class="subtitle"><i class="fas fa-hand-holding-heart"></i>  assistive & therapeutic</div>
-        <p>Wearable exoskeletons, neuro‑stimulation, and smart rehab devices that restore mobility and improve quality of life for patients and clinicians.</p>
-        <div class="product-grid">
-          <div class="product-item">
-            <i class="fas fa-tshirt"></i>
-            <span>Exo‑Lite</span>
-            <small>upper limb</small>
-          </div>
-          <div class="product-item">
-            <i class="fas fa-shoe-prints"></i>
-            <span>Gait‑Aid</span>
-            <small>lower limb</small>
-          </div>
-          <div class="product-item">
-            <i class="fas fa-wave-square"></i>
-            <span>Neuro‑Stim</span>
-            <small>FES</small>
-          </div>
-        </div>
-        <div class="pillar-cta">
-          <span class="btn-primary"><i class="fas fa-arrow-right"></i> Rehab solutions</span>
-          <span class="btn-primary-outline"><i class="fas fa-clinic-medical"></i> Clinical trials</span>
-        </div>
-      </div>
+    <!-- ===== TOAST NOTIFICATION ===== -->
+    <div id="toast" class="toast">
+        <i class="fas fa-check-circle"></i>
+        <span id="toastMessage">Action triggered successfully</span>
     </div>
 
-    <!-- equal weight highlight / divider -->
-    <div class="divider-section">
-      <div class="tag"><i class="fas fa-circle"></i>  humanoid · rehabilitation ·  dual expertise  <i class="fas fa-circle"></i></div>
+    <!-- ===== BACK TO TOP BUTTON ===== -->
+    <button id="backToTop" class="back-to-top" aria-label="Back to top">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+
+    <!-- ===== MAIN CONTAINER ===== -->
+    <div class="container">
+
+        <!-- ===== HEADER ===== -->
+        <header>
+            <nav class="navbar">
+                <div class="logo" id="logo">
+                    <i class="fas fa-robot"></i>
+                    <span>NOVA</span>
+                </div>
+                <div class="nav-links">
+                    <a href="#" id="navResearch">Research</a>
+                    <a href="#" id="navProducts">Products</a>
+                    <a href="#" id="navAbout">About</a>
+                    <a href="#" id="navCareers">Careers</a>
+                    <a href="#" id="navBlog">Blog</a>
+                    <button class="btn-outline" id="contactBtn">
+                        <i class="fas fa-arrow-right"></i> Contact
+                    </button>
+                </div>
+            </nav>
+        </header>
+
+        <!-- ===== HERO SECTION ===== -->
+        <section class="hero">
+            <div class="hero-badge" id="heroBadge">
+                <i class="fas fa-microchip"></i> deep-tech · dual focus
+            </div>
+            <h1>Humanoid <span>+</span> Rehabilitation</h1>
+            <p>Engineering the future of movement — from intelligent humanoid platforms to life-changing rehabilitation devices that restore mobility and hope.</p>
+            <div class="hero-actions">
+                <button class="btn-primary" id="heroExplore">
+                    <i class="fas fa-rocket"></i> Explore Solutions
+                </button>
+                <button class="btn-primary-outline" id="heroLearn">
+                    <i class="fas fa-play-circle"></i> Learn More
+                </button>
+            </div>
+        </section>
+
+        <!-- ===== PILLARS SECTION ===== -->
+        <div class="pillars">
+
+            <!-- Humanoid Robotics -->
+            <div class="pillar-card" id="roboticsCard">
+                <div class="pillar-icon"><i class="fas fa-robot"></i></div>
+                <h2>Humanoid Robotics</h2>
+                <div class="subtitle">
+                    <i class="fas fa-cogs"></i> advanced locomotion & AI
+                </div>
+                <p>Full‑scale humanoid platforms designed for research, automation, and human‑robot interaction. Built with modular actuation, real‑time perception, and adaptive control systems.</p>
+                <div class="product-grid">
+                    <div class="product-item" data-product="NOVA-H1">
+                        <i class="fas fa-walking"></i>
+                        <span>NOVA‑H1</span>
+                        <small>bi-pedal</small>
+                    </div>
+                    <div class="product-item" data-product="Dexterous Hand">
+                        <i class="fas fa-hand-peace"></i>
+                        <span>Dexterous hand</span>
+                        <small>tactile</small>
+                    </div>
+                    <div class="product-item" data-product="Neuro-control">
+                        <i class="fas fa-brain"></i>
+                        <span>Neuro‑control</span>
+                        <small>edge AI</small>
+                    </div>
+                </div>
+                <div class="pillar-cta">
+                    <button class="btn-primary" id="exploreRobotics">
+                        <i class="fas fa-arrow-right"></i> Explore robotics
+                    </button>
+                    <button class="btn-primary-outline" id="whitepaperBtn">
+                        <i class="fas fa-book-open"></i> Whitepaper
+                    </button>
+                </div>
+            </div>
+
+            <!-- Rehabilitation Devices -->
+            <div class="pillar-card" id="rehabCard">
+                <div class="pillar-icon"><i class="fas fa-heartbeat"></i></div>
+                <h2>Rehabilitation</h2>
+                <div class="subtitle">
+                    <i class="fas fa-hand-holding-heart"></i> assistive & therapeutic
+                </div>
+                <p>Wearable exoskeletons, neuro‑stimulation, and smart rehab devices that restore mobility and improve quality of life for patients and clinicians worldwide.</p>
+                <div class="product-grid">
+                    <div class="product-item" data-product="Exo-Lite">
+                        <i class="fas fa-tshirt"></i>
+                        <span>Exo‑Lite</span>
+                        <small>upper limb</small>
+                    </div>
+                    <div class="product-item" data-product="Gait-Aid">
+                        <i class="fas fa-shoe-prints"></i>
+                        <span>Gait‑Aid</span>
+                        <small>lower limb</small>
+                    </div>
+                    <div class="product-item" data-product="Neuro-Stim">
+                        <i class="fas fa-wave-square"></i>
+                        <span>Neuro‑Stim</span>
+                        <small>FES</small>
+                    </div>
+                </div>
+                <div class="pillar-cta">
+                    <button class="btn-primary" id="exploreRehab">
+                        <i class="fas fa-arrow-right"></i> Rehab solutions
+                    </button>
+                    <button class="btn-primary-outline" id="clinicalBtn">
+                        <i class="fas fa-clinic-medical"></i> Clinical trials
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- ===== DIVIDER ===== -->
+        <div class="divider-section">
+            <div class="tag" id="dividerTag">
+                <i class="fas fa-circle"></i> humanoid · rehabilitation · dual expertise <i class="fas fa-circle"></i>
+            </div>
+        </div>
+
+        <!-- ===== INNOVATION STATS ===== -->
+        <div class="innovation">
+            <div class="innovation-item" data-stat="humanoid prototypes">
+                <div class="number">12+</div>
+                <div class="label">humanoid prototypes</div>
+            </div>
+            <div class="innovation-item" data-stat="rehab devices">
+                <div class="number">8</div>
+                <div class="label">rehab devices (FDA/CE)</div>
+            </div>
+            <div class="innovation-item" data-stat="clinical installations">
+                <div class="number">200+</div>
+                <div class="label">clinical installations</div>
+            </div>
+            <div class="innovation-item" data-stat="research publications">
+                <div class="number">47</div>
+                <div class="label">research publications</div>
+            </div>
+        </div>
+
+        <!-- ===== TESTIMONIALS SECTION ===== -->
+        <section class="testimonials">
+            <h2 class="section-title">What Our Partners Say</h2>
+            <p class="section-subtitle">Trusted by leading research institutions and healthcare providers worldwide.</p>
+            <div class="testimonial-grid">
+                <div class="testimonial-card">
+                    <div class="quote">"NOVA's humanoid platform has revolutionized our research in bipedal locomotion. The modular design and AI capabilities are unmatched."</div>
+                    <div class="author">
+                        <div class="avatar">JD</div>
+                        <div>
+                            <div class="name">Dr. Jane Doe</div>
+                            <div class="role">MIT Robotics Lab</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial-card">
+                    <div class="quote">"The rehabilitation devices from NOVA have transformed patient outcomes. The Exo-Lite system is a game-changer for stroke recovery."</div>
+                    <div class="author">
+                        <div class="avatar">MS</div>
+                        <div>
+                            <div class="name">Dr. Mark Smith</div>
+                            <div class="role">Mayo Clinic</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial-card">
+                    <div class="quote">"Neuro-control integration with our existing systems was seamless. The edge AI capabilities open new possibilities for real-time adaptation."</div>
+                    <div class="author">
+                        <div class="avatar">AL</div>
+                        <div>
+                            <div class="name">Prof. Anna Lee</div>
+                            <div class="role">Stanford University</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===== FOOTER ===== -->
+        <footer class="footer">
+            <div class="footer-links">
+                <span>© 2026 NOVA technologies</span>
+                <a href="#" id="footerPrivacy">Privacy Policy</a>
+                <a href="#" id="footerTerms">Terms of Service</a>
+                <a href="#" id="footerSupport">Support</a>
+            </div>
+            <div class="social-links">
+                <a href="#" id="twitter"><i class="fab fa-twitter"></i></a>
+                <a href="#" id="linkedin"><i class="fab fa-linkedin-in"></i></a>
+                <a href="#" id="youtube"><i class="fab fa-youtube"></i></a>
+                <a href="#" id="github"><i class="fab fa-github"></i></a>
+                <a href="#" id="email"><i class="fas fa-envelope"></i></a>
+            </div>
+        </footer>
     </div>
 
-    <!-- stats / innovation -->
-    <div class="innovation">
-      <div class="innovation-item">
-        <div class="number">12+</div>
-        <div class="label">humanoid prototypes</div>
-      </div>
-      <div class="innovation-item">
-        <div class="number">8</div>
-        <div class="label">rehab devices (FDA/CE)</div>
-      </div>
-      <div class="innovation-item">
-        <div class="number">200+</div>
-        <div class="label">clinical installations</div>
-      </div>
-      <div class="innovation-item">
-        <div class="number">47</div>
-        <div class="label">research publications</div>
-      </div>
-    </div>
+    <!-- ============================================================ -->
+    <!-- ===== JAVASCRIPT - FULLY FUNCTIONAL ===== -->
+    <!-- ============================================================ -->
+    <script>
+        (function() {
+            'use strict';
 
-    <!-- footer -->
-    <footer class="footer">
-      <div>© 2026 NOVA technologies — humanoid · rehabilitation</div>
-      <div>
-        <a href="#"><i class="fab fa-twitter"></i></a>
-        <a href="#"><i class="fab fa-linkedin-in"></i></a>
-        <a href="#"><i class="fab fa-youtube"></i></a>
-        <a href="#"><i class="fas fa-envelope"></i></a>
-      </div>
-    </footer>
-  </div>
+            // ============================================================
+            // TOAST SYSTEM
+            // ============================================================
+            const toast = document.getElementById('toast');
+            const toastMessage = document.getElementById('toastMessage');
+            let toastTimeout = null;
+
+            function showToast(message, icon = 'fa-check-circle') {
+                toastMessage.textContent = message;
+                toast.querySelector('i').className = `fas ${icon}`;
+                toast.classList.add('show');
+                clearTimeout(toastTimeout);
+                toastTimeout = setTimeout(() => {
+                    toast.classList.remove('show');
+                }, 3500);
+            }
+
+            // ============================================================
+            // BACK TO TOP
+            // ============================================================
+            const backToTop = document.getElementById('backToTop');
+
+            window.addEventListener('scroll', function() {
+                if (window.scrollY > 500) {
+                    backToTop.classList.add('visible');
+                } else {
+                    backToTop.classList.remove('visible');
+                }
+            });
+
+            backToTop.addEventListener('click', function() {
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+                showToast('📍 Back to top', 'fa-arrow-up');
+            });
+
+            // ============================================================
+            // NAVIGATION LINKS
+            // ============================================================
+            document.getElementById('navResearch').addEventListener('click', function(e) {
+                e.preventDefault();
+                showToast('🔬 Research: 47 publications, 12+ prototypes, 8 active grants', 'fa-microscope');
+            });
+
+            document.getElementById('navProducts').addEventListener('click', function(e) {
+                e.preventDefault();
+                showToast('📦 Products: Humanoid Robotics & Rehabilitation Devices', 'fa-boxes');
+            });
+
+            document.getElementById('navAbout').addEventListener('click', function(e) {
+                e.preventDefault();
+                showToast('🏢 About NOVA: Founded 2018, dual-focus on robotics & rehab', 'fa-building');
+            });
+
+            document.getElementById('navCareers').addEventListener('click', function(e) {
+                e.preventDefault();
+                showToast('💼 Careers: Open positions in AI, Mechatronics, Clinical Research', 'fa-briefcase');
+            });
+
+            document.getElementById('navBlog').addEventListener('click', function(e) {
+                e.preventDefault();
+                showToast('📝 Blog: Latest insights on robotics & rehabilitation', 'fa-blog');
+            });
+
+            document.getElementById('contactBtn').addEventListener('click', function(e) {
+                e.preventDefault();
+                showToast('📬 Contact: hello@novatech.ai | +1 (800) 555‑NOVA', 'fa-envelope');
+            });
+
+            // ============================================================
+            // LOGO
+            // ============================================================
+            document.getElementById('logo').addEventListener('click', function() {
+                showToast('🏠 NOVA Technologies — Humanoid + Rehabilitation', 'fa-robot');
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            });
+
+            // ============================================================
+            // HERO BUTTONS
+            // ============================================================
+            document.getElementById('heroExplore').addEventListener('click', function() {
+                showToast('🚀 Explore NOVA solutions: Robotics & Rehabilitation', 'fa-rocket');
+                document.querySelector('.pillars').scrollIntoView({ behavior: 'smooth', block: 'start' });
+            });
+
+            document.getElementById('heroLearn').addEventListener('click', function() {
+                showToast('📖 Learn more about our dual-focus technology', 'fa-play-circle');
+            });
+
+            // ============================================================
+            // HERO BADGE
+            // ============================================================
+            document.getElementById('heroBadge').addEventListener('click', function() {
+                showToast('⚡ Dual-focus: Humanoid Robotics & Rehabilitation Devices', 'fa-microchip');
+            });
+
+            // ============================================================
+            // EXPLORE ROBOTICS
+            // ============================================================
+            document.getElementById('exploreRobotics').addEventListener('click', function() {
+                showToast('🤖 Exploring Humanoid Robotics: NOVA-H1, Dexterous Hand, Neuro-control', 'fa-robot');
+            });
+
+            // ============================================================
+            // WHITEPAPER
+            // ============================================================
+            document.getElementById('whitepaperBtn').addEventListener('click', function() {
+                showToast('📄 Downloading Whitepaper: "Humanoid Locomotion & AI Systems"', 'fa-book-open');
+            });
+
+            // ============================================================
+            // EXPLORE REHAB
+            // ============================================================
+            document.getElementById('exploreRehab').addEventListener('click', function() {
+                showToast('🩺 Exploring Rehabilitation: Exo-Lite, Gait-Aid, Neuro-Stim', 'fa-heartbeat');
+            });
+
+            // ============================================================
+            // CLINICAL TRIALS
+            // ============================================================
+            document.getElementById('clinicalBtn').addEventListener('click', function() {
+                showToast('🧪 Clinical Trials: 8 active studies, 200+ patients enrolled', 'fa-clinic-medical');
+            });
+
+            // ============================================================
+            // DIVIDER TAG
+            // ============================================================
+            document.getElementById('dividerTag').addEventListener('click', function() {
+                showToast('⚖️ Equal focus: Robotics · Rehabilitation', 'fa-balance-scale');
+            });
+
+            // ============================================================
+            // PRODUCT ITEMS
+            // ============================================================
+            document.querySelectorAll('.product-item').forEach(function(item) {
+                item.addEventListener('click', function() {
+                    const product = this.dataset.product || 'Product';
+                    const tag = this.querySelector('small')?.textContent || '';
+                    showToast(`🔍 ${product} — ${tag} (click for details)`, 'fa-info-circle');
+                });
+            });
+
+            // ============================================================
+            // INNOVATION STATS
+            // ============================================================
+            document.querySelectorAll('.innovation-item').forEach(function(item) {
+                item.addEventListener('click', function() {
+                    const stat = this.dataset.stat || 'Statistic';
+                    const number = this.querySelector('.number')?.textContent || '';
+                    showToast(`📊 ${number} ${stat}`, 'fa-chart-line');
+                });
+            });
+
+            // ============================================================
+            // TESTIMONIAL CARDS
+            // ============================================================
+            document.querySelectorAll('.testimonial-card').forEach(function(card) {
+                card.addEventListener('click', function() {
+                    const author = this.querySelector('.name')?.textContent || 'Partner';
+                    showToast(`💬 ${author} — View full testimonial`, 'fa-quote-right');
+                });
+            });
+
+            // ============================================================
+            // PILLAR CARDS (click on card background)
+            // ============================================================
+            document.getElementById('roboticsCard').addEventListener('click', function(e) {
+                if (e.target.closest('button') || e.target.closest('.product-item')) return;
+                showToast('🤖 Humanoid Robotics: Advanced actuation, AI perception, modular design', 'fa-robot');
+            });
+
+            document.getElementById('rehabCard').addEventListener('click', function(e) {
+                if (e.target.closest('button') || e.target.closest('.product-item')) return;
+                showToast('❤️ Rehabilitation: Restoring mobility, improving quality of life', 'fa-heartbeat');
+            });
+
+            // ============================================================
+            // FOOTER LINKS
+            // ============================================================
+            document.getElementById('footerPrivacy').addEventListener('click', function(e) {
+                e.preventDefault();
+                showToast('🔒 Privacy Policy: Your data is secure with NOVA', 'fa-shield-alt');
+            });
+
+            document.getElementById('footerTerms').addEventListener('click', function(e) {
+                e.preventDefault();
+                showToast('📋 Terms of Service: Innovation with responsibility', 'fa-file-contract');
+            });
+
+            document.getElementById('footerSupport').addEventListener('click', function(e) {
+                e.preventDefault();
+                showToast('🆘 Support: 24/7 technical assistance available', 'fa-headset');
+            });
+
+            // ============================================================
+            // FOOTER SOCIAL ICONS
+            // ============================================================
+            document.getElementById('twitter').addEventListener('click', function(e) {
+                e.preventDefault();
+                showToast('🐦 Twitter: @NOVA_robotics — Follow us!', 'fa-twitter');
+            });
+
+            document.getElementById('linkedin').addEventListener('click', function(e) {
+                e.preventDefault();
+                showToast('🔗 LinkedIn: NOVA Technologies — Connect with us', 'fa-linkedin-in');
+            });
+
+            document.getElementById('youtube').addEventListener('click', function(e) {
+                e.preventDefault();
+                showToast('📺 YouTube: NOVA Robotics & Rehabilitation Channel', 'fa-youtube');
+            });
+
+            document.getElementById('github').addEventListener('click', function(e) {
+                e.preventDefault();
+                showToast('🐙 GitHub: Open-source robotics & rehab projects', 'fa-github');
+            });
+
+            document.getElementById('email').addEventListener('click', function(e) {
+                e.preventDefault();
+                showToast('✉️ press@novatech.ai | support@novatech.ai', 'fa-envelope');
+            });
+
+            // ============================================================
+            // KEYBOARD ACCESSIBILITY (Enter/Space on clickable elements)
+            // ============================================================
+            document.querySelectorAll('[role="button"], .btn-primary, .btn-primary-outline, .btn-accent, .btn-outline, .product-item, .innovation-item, .testimonial-card')
+                .forEach(function(el) {
+                    el.addEventListener('keydown', function(e) {
+                        if (e.key === 'Enter' || e.key === ' ') {
+                            e.preventDefault();
+                            this.click();
+                        }
+                    });
+                });
+
+            // ============================================================
+            // CONSOLE LOG
+            // ============================================================
+            console.log('🚀 NOVA Landing Page fully functional!');
+            console.log('📊 All interactive elements are working.');
+
+        })();
+    </script>
+
 </body>
 </html>
